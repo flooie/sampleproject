@@ -22,5 +22,9 @@ jobs:
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         if: contains(env.COMMIT_MESSAGE, 'SomeString')
         run: echo "The commit message is some string SomeString"
-        if: !contains(env.COMMIT_MESSAGE, 'SomeString')
-        run: echo "This was a normal commit message"
+
+      - name: Test Trigger IV
+        env:
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        if: github.ref == 'master'
+        run: echo "this is on the master branch"
