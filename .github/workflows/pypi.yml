@@ -22,6 +22,7 @@ jobs:
           echo "Crazy test branch"
           echo "$GITHUB_CONTEXT"
           echo "$GITHUB_REF"
+
       - name: Trigger PyPI Release
         if: contains(env.BRANCH, 'tag') && contains(env.COMMIT_MESSAGE, 'Version Bump')
         run: |
