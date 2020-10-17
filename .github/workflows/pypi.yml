@@ -16,6 +16,7 @@ jobs:
           echo "$GITHUB_CONTEXT"
           echo "$BRANCH"
           echo "$COMMIT_MSG"
+          echo "Crazy test branch"
         
       - name: Test Trigger II
         env:
