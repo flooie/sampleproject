@@ -1,22 +1,13 @@
-name: Worflow demo
+name: PyPI
 on:
   push:
     tags:
-      - v*
+      - v*.*.*
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  PyPI:
     steps:
-      - uses: actions/checkout@v1
-      - name: Print Ref
-        env:
-          BRANCH: ${{ github.ref }}
-        run: |
-          echo "$BRANCH"
-      - name: Exit if not on master branch
-        if: endsWith(github.ref, 'master') == false
-        run: exit -1
-
-      - name: Next job ...
-        run: |
-          echo "Tag and master"
+      - uses: actions/checkout@v2
+      - uses: casperdcl/deploy-pypi@v1
+        with:
+          password: ${{ secrets.pypi_token }}
+          build: true
