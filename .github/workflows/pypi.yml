@@ -22,3 +22,5 @@ jobs:
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         if: contains(env.COMMIT_MESSAGE, 'SomeString')
         run: echo "The commit message is some string SomeString"
+        else:
+        run: echo "This was a normal commit message"
