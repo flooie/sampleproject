@@ -28,3 +28,9 @@ jobs:
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         if: github.ref == 'refs/heads/main'
         run: echo "this is on the master branch"
+
+      - name: Test Trigger V
+        env:
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        if: success()
+        run: echo "this on the master branch with a commit message we like"
