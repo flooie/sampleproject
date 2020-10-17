@@ -1,4 +1,4 @@
-name: Sample Testing
+name: Functional Example
 
 on: 
   [push]
