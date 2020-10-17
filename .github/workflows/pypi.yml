@@ -1,41 +1,28 @@
-name: Functional Example
+name: Example
 
 on: 
-  [push]
-
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
-  one:
+  Run PyPI Test:
     runs-on: ubuntu-latest
     steps:
       - name: Test Trigger I
         env:
           COMMIT_MSG: ${{ github.event.head_commit.message }}
           BRANCH: ${{ github.ref }}
-          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
-          echo "$GITHUB_CONTEXT"
           echo "$BRANCH"
           echo "$COMMIT_MSG"
+          echo "Crazy test branch"
         
-      - name: Test Trigger II
-        env:
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-        run: echo "$COMMIT_MESSAGE"
+      - name: Trigger PyPI Release
+        if: contains(env.BRANCH, 'tag') && contains(env.COMMIT_MESSAGE, 'Version Bump')
+        run: |
+          echo "Version Bump on Master triggered. Sending code to PyPI"
+          echo "Fake Sending twine execution"
 
-      - name: Test Trigger III
-        env:
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-        if: contains(env.COMMIT_MESSAGE, 'version bump')
-        run: echo "The commit message is some string SomeString"
-
-      - name: Test Trigger IV
-        env:
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-        if: github.ref == 'refs/heads/main'
-        run: echo "this is on the master branch"
-
-      - name: Test Trigger V
-        env:
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-        if: github.ref == 'refs/heads/main' && contains(env.COMMIT_MESSAGE, 'version bump')
-        run: echo "this on the master branch with a commit message we like"
