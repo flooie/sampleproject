@@ -20,5 +20,5 @@ jobs:
       - name: Test Trigger III
         env:
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-        if: contains("$COMMIT_MESSAGE", 'SomeString')
+        if: contains($COMMIT_MESSAGE, 'SomeString')
         run: echo "The commit message is some string"
