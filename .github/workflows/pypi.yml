@@ -8,7 +8,7 @@ on:
     branches:
       - main
 jobs:
-  Run PyPI Test:
+  PyPI:
     runs-on: ubuntu-latest
     steps:
       - name: Test Trigger I
