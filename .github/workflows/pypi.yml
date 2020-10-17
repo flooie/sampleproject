@@ -1,30 +1,19 @@
-name: Sample Project
- 
-on: 
+name: Worflow demo
+on:
   push:
-    branches:
-      - main
     tags:
-     - v*.*.*
+      - v*
+
 jobs:
-  PyPI:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Test Trigger I
-        env:
-          COMMIT_MSG: ${{ github.event.head_commit.message }}
-          BRANCH: ${{ github.ref }}
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: |
-          echo "$BRANCH"
-          echo "$COMMIT_MSG"
-          echo "Crazy test branch"
-          echo "$GITHUB_CONTEXT"
-          echo "$GITHUB_REF"
+      - uses: actions/checkout@v1
 
-      - name: Trigger PyPI Release
-        if: contains(env.BRANCH, 'tag') && contains(env.COMMIT_MESSAGE, 'Version Bump')
-        run: |
-          echo "Version Bump on Master triggered. Sending code to PyPI"
-          echo "Fake Sending twine execution"
+      - name: Exit if not on master branch
+        if: endsWith(github.ref, 'master') == false
+        run: exit -1
 
+      - name: Next job ...
+        run: |
+          echo "Tag and master"
