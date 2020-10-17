@@ -20,7 +20,7 @@ jobs:
       - name: Test Trigger III
         env:
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-        if: contains(env.COMMIT_MESSAGE, 'SomeString')
+        if: contains(env.COMMIT_MESSAGE, 'version bump')
         run: echo "The commit message is some string SomeString"
 
       - name: Test Trigger IV
