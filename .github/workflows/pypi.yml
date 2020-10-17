@@ -14,5 +14,5 @@ jobs:
         
       - name: Test Trigger II
         env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo ${{ toJson(github) }}
+          GT: ${{ toJson(github) }}
+        run: echo "${{ toJson(github) }}"
