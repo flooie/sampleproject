@@ -32,5 +32,5 @@ jobs:
       - name: Test Trigger V
         env:
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-        if: success()
+        if: github.ref == 'refs/heads/main' || contains(env.COMMIT_MESSAGE, 'version bump')
         run: echo "this on the master branch with a commit message we like"
