@@ -1,12 +1,10 @@
 name: Release
 on:
   pull_request:
-    tags:
-      - v*.*.*
-    types:
-      - [closed]
     branches:
       - main
+    tags:
+      - v*.*.*
 
 jobs:
   build:
