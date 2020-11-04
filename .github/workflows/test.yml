@@ -1,19 +1,19 @@
-name: Tagged PR Merger
-
-on:
-  push:
-    tags:
-      - v*.*.*
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Pull request merged
-      if: github.action == 'closed' && github.pull_request.merged == 'true'
-      run: echo merged
-
-    - name: Last run
-      run: echo github.pull_request.merged
+#name: Tagged PR Merger
+#
+#on:
+#  push:
+#    tags:
+#      - v*.*.*
+#
+#jobs:
+##  build:
+#
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - name: Pull request merged
+#      if: github.action == 'closed' && github.pull_request.merged == 'true'
+#      run: echo merged
+#
+#    - name: Last run
+#      run: echo github.pull_request.merged
