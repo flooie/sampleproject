@@ -29,6 +29,10 @@ jobs:
           COMMIT_MSG: ${{ github.event.head_commit.message }}
           BRANCH: ${{ github.ref }}
           GITHUB_CONTEXT: ${{ toJson(github) }}
+          ACTION: ${{ toJson(github.action) }}
+          MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
+
+
         run: |
           echo "$BRANCH"
           echo "$COMMIT_MSG"
@@ -45,5 +49,5 @@ jobs:
 
       - name: Read actions
         run: |
-          echo github.action
-          echo github.pull_request.merged
+          echo "$ACTION"
+          echo "$MERGE_STATUS"
