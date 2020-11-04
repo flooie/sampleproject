@@ -1,19 +1,17 @@
-#name: Tagged PR Merger
-#
-#on:
-#  push:
-#    tags:
-#      - v*.*.*
-#
-#jobs:
-##  build:
-#
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#    - name: Pull request merged
+name: Tagged PR Merger
+
+on:
+  push:
+    tags:
+      - v*.*.*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check if this is tagged
 #      if: github.action == 'closed' && github.pull_request.merged == 'true'
 #      run: echo merged
-#
+#https://api.github.com/repos/flooie/sampleproject/tags
 #    - name: Last run
 #      run: echo github.pull_request.merged
