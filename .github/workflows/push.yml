@@ -1,0 +1,40 @@
+
+name: Check Deployment and versions
+
+on:
+  push:
+    tags:
+      - v*.*.*
+
+jobs:
+  check-tag-branch:
+    runs-on: ubuntu-latest
+    steps:
+    - name: get tag commit hash
+      id: tag-commit-hash
+      run: |
+        hash=${{ GITHUB.SHA }}
+        echo "::set-output name=tag-hash::${hash}"
+        echo $hash
+    - name: checkout master
+      uses: actions/checkout@v2
+      with:
+        ref: master
+    - name: get latest master commit hash
+      id: master-commit-hash
+      run: |
+        hash=$(git log -n1 --format=format:"%H")
+        echo "::set-output name=master-hash::${hash}"
+        echo $hash
+    - name: exit if tag commit hash don't match master commit hash
+      if: steps.tag-commit-hash.outputs.tag-hash != steps.master-commit-hash.outputs.master-hash
+      run: exit 1
+
+  build-base:
+    needs: [check-tag-branch]
+    runs-on: ubuntu-latest
+    steps:
+    - name: setup python
+      uses: actions/setup-python@v1
+    - name: echo something
+      run: echo "This steps run successfully"
