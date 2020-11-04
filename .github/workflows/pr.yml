@@ -32,3 +32,10 @@ jobs:
     steps:
     - name: Print false
       run: echo "false"
+
+  final:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+    - name: Print false
+      run: echo "true its true and lets say Untagged?"
