@@ -4,6 +4,8 @@ on:
     types: [closed]
     branches:
       - main
+    tags:
+      - v*.*.*
 
 jobs:
   build:
