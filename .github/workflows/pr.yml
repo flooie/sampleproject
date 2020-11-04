@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     if: github.event.pull_request.merged == true
-    steps: // the rest of the code
+    steps:
     - name: Print SUCCESS
       env:
         COMMIT_MSG: ${{ github.event.head_commit.message }}
