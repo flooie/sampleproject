@@ -1,9 +1,10 @@
 name: Release
 on:
-  tags:
-    - v*.*.*
   pull_request:
-    types: [closed]
+    tags:
+      - v*.*.*
+    types:
+      - [closed]
     branches:
       - main
 
