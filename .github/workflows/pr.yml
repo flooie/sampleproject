@@ -17,10 +17,10 @@ jobs:
         ACTION: ${{ toJson(github.action) }}
         MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
 
-        run: |
-          echo "Crazy test branch"
-          echo "$BRANCH"
-          echo "$GITHUB_REF"
+      run: |
+        echo "Crazy test branch"
+        echo "$BRANCH"
+        echo "$GITHUB_REF"
 
 
 
