@@ -12,3 +12,36 @@
 #        with:
 #          password: ${{ secrets.pypi_token }}
 #          build: true
+
+name: Sample Project
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+     - v*.*.*
+
+
+jobs:
+  PyPI:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Trigger I
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+          BRANCH: ${{ github.ref }}
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$BRANCH"
+          echo "$COMMIT_MSG"
+          echo "Crazy test branch"
+          echo "$GITHUB_CONTEXT"
+          echo "$GITHUB_REF"
+
+      - name: Trigger PyPI Release
+        if: contains(env.BRANCH, 'tag') && contains(env.COMMIT_MESSAGE, 'Version Bump')
+        run: |
+          echo "Version Bump on Master triggered. Sending code to PyPI"
+          echo "Fake Sending twine execution"
+
