@@ -14,3 +14,6 @@ jobs:
     - name: Pull request merged
       if: github.action == 'closed' && github.pull_request.merged == 'true'
       run: echo merged
+
+    - name: Last run
+      run: echo github.pull_request.merged
