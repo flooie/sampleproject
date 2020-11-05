@@ -20,4 +20,3 @@ jobs:
         echo "$GITHUB_CONTEXT"
 
 
-#okay lets add a version type
