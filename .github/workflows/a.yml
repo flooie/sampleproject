@@ -1,0 +1,21 @@
+on:
+  pull_request:
+    types: [opened, closed]
+  branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+    - name: Print SUCCESS
+      env:
+        COMMIT_MSG: ${{ github.event.head_commit.message }}
+        BRANCH: ${{ github.ref }}
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+        ACTION: ${{ toJson(github.action) }}
+        MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
+
+      run: |
+        echo "$GITHUB_CONTEXT"
