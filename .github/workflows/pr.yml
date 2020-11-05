@@ -38,10 +38,11 @@ jobs:
         MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
 
       run: |
-        echo "false"
+        echo "----run it----"
+        echo "commit msg = $GITHUB_CONTEXT"
         echo "Branch = $BRANCH"
         echo "Ref = $GITHUB_REF"
-        echo "full context = $GITHUB_CONTEXT"
+        echo "full context = COMMIT_MSG"
         echo "labels = $LABELS"
 
   final:
