@@ -28,4 +28,4 @@ jobs:
     - name: curl
       uses: wei/curl@master
       with:
-        args: https://httpbin.org/get
+        args: https://api.github.com/repos/flooie/sampleproject/tags
