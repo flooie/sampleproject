@@ -26,7 +26,7 @@ jobs:
 
   more:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == false
+    if: toJson(github.event.pull_request.labels[0].name) == "versionbump"
     steps:
     - name: Print false
       env:
@@ -43,18 +43,10 @@ jobs:
 
       run: |
         echo "----run it----"
-#        echo "full context = $GITHUB_CONTEXT"
-#        echo "commit msg = $COMMIT_MSG"
-#        echo "Branch = $BRANCH"
-#        echo "Ref = $GITHUB_REF"
         echo "labels = $LABELS"
         echo "labelsI = $LABELSI"
         echo "labelsII = $LABELSII"
-#        echo "EVENTs = $EVENT"
-#        echo "PRs = $PRs"
-#        echo "NAMEs = $NAMES"
-#        echo "ACTIONs = $ACTION"
-#        echo "MERGE_STATUSes = $MERGE_STATUS"
+
 
   final:
     runs-on: ubuntu-latest
