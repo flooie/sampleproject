@@ -1,8 +1,8 @@
 name: Release
 on:
   push:
-    tags:
-      - v*.*.*
+#    tags:
+#      - v*.*.*
   pull_request:
 
 
@@ -20,11 +20,9 @@ jobs:
         MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
 
       run: |
-        echo "Crazy test branch"
         echo "$BRANCH"
-        echo "$GITHUB_REF"
         echo "$GITHUB_CONTEXT"
-        echo "this shouldnt run"
+        echo "<------->"
 
   more:
     runs-on: ubuntu-latest
@@ -41,11 +39,10 @@ jobs:
 
       run: |
         echo "false"
-        echo "$BRANCH"
-        echo "$GITHUB_REF"
-        echo "$GITHUB_CONTEXT"
-        echo "this shouldnt run"
-        echo "$LABELS"
+        echo "Branch = $BRANCH"
+        echo "Ref = $GITHUB_REF"
+        echo "full context = $GITHUB_CONTEXT"
+        echo "labels = $LABELS"
 
   final:
     runs-on: ubuntu-latest
@@ -53,3 +50,6 @@ jobs:
     steps:
     - name: Print false
       run: echo "true its true and lets say  can this work without a tag?"
+
+
+#  OK asdfasdfsa
