@@ -41,8 +41,8 @@ jobs:
         ACTION: ${{ toJson(github.action) }}
         MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
 
-    if $LABELSII == "versionbump"
-
+    - name: Next
+      if $LABELSII == "versionbump"
       run: |
         echo "----run it----"
         echo "labels = $LABELS"
