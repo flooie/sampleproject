@@ -20,18 +20,12 @@
 ##https://api.github.com/repos/flooie/sampleproject/tags
 
 name: Check Deployment and versions
-on:
-  push:
-
+on: push
 jobs:
-  build:
+  curl:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: satak/webrequest-action@master
+    - name: curl
+      uses: wei/curl@master
       with:
-        url: https://api.github.com/repos/flooie/sampleproject/tags
-        method: GET
-        run: |
-          $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
-          echo "$output"
+        args: https://httpbin.org/get
