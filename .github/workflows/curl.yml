@@ -26,6 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: curl
+      id: api
       uses: wei/curl@master
       with:
         args: https://api.github.com/repos/flooie/sampleproject/tags
+    - name: 'Use response'
+        run: echo ${{ steps.api.outputs.response }}
