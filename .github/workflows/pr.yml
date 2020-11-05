@@ -1,9 +1,9 @@
 name: Release
 on:
   push:
-    tags:
-      - v*.*.*
-  pull_request:
+#    tags:
+#      - v*.*.*
+#  pull_request:
 
 
 jobs:
@@ -20,11 +20,9 @@ jobs:
         MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
 
       run: |
-        echo "Crazy test branch"
         echo "$BRANCH"
-        echo "$GITHUB_REF"
         echo "$GITHUB_CONTEXT"
-        echo "this shouldnt run"
+        echo "<------->"
 
   more:
     runs-on: ubuntu-latest
