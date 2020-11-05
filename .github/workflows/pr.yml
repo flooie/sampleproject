@@ -37,18 +37,18 @@ jobs:
         LABELS: ${{ github.event.pull_request.labels }}
         NAMES: ${{ github.event.pull_request.labels.name }}
         ACTION: ${{ toJson(github.action) }}
-        MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
+        MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
 
       run: |
         echo "----run it----"
-        echo "commit msg = $GITHUB_CONTEXT"
+        echo "full context = $GITHUB_CONTEXT"
+        echo "commit msg = $COMMIT_MSG"
         echo "Branch = $BRANCH"
         echo "Ref = $GITHUB_REF"
-        echo "full context = $COMMIT_MSG"
         echo "labels = $LABELS"
         echo "EVENTs = $EVENT"
         echo "PRs = $PRs"
-        echo "$NAMEs = $NAMES"
+        echo "NAMEs = $NAMES"
         echo "ACTIONs = $ACTION"
         echo "MERGE_STATUSes = $MERGE_STATUS"
 
