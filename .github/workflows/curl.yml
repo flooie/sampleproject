@@ -31,4 +31,4 @@ jobs:
       with:
         args: https://api.github.com/repos/flooie/sampleproject/tags
     - name: 'Use response'
-        run: echo ${{ steps.api.outputs.response }}
+        run: echo ${{ steps.api }}
