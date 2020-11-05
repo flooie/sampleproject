@@ -1,15 +1,8 @@
-name: Release a yml
-
+name: Release
 on:
   pull_request:
-    types: [opened, closed]
-
-#on:
-#  pull_request:
-#    types: [opened, closed]
-#  branches:
-#    - main
-#
+    tags:
+      - v*.*.*
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,3 +18,4 @@ jobs:
 
       run: |
         echo "$GITHUB_CONTEXT"
+
