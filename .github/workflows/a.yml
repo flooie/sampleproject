@@ -17,22 +17,5 @@ jobs:
         MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
 
       run: |
-        echo "Crazy test branch"
-        echo "$BRANCH"
-        echo "$GITHUB_REF"
         echo "$GITHUB_CONTEXT"
-        echo "this shouldnt run"
 
-  more:
-    runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == false
-    steps:
-    - name: Print false
-      run: echo "false"
-
-  final:
-    runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
-    steps:
-    - name: Print false
-      run: echo "true its true and lets say  can this work without a tag?"
