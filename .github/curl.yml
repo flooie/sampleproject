@@ -1,0 +1,55 @@
+#
+#
+#name: Check Deployment and versions
+#
+#on:
+#  push:
+#
+##        hash=${{ GITHUB.SHA }}
+#
+#jobs:
+#  check-tag-branch:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: get tag commit hash
+#      id: tag-commit-hash
+#      run: |
+#        hash=${{ GITHUB.SHA }}
+#        echo "::set-output name=tag-hash::${hash}"
+#
+##https://api.github.com/repos/flooie/sampleproject/tags
+
+#name: Check Deployment and versions
+#on: push
+#jobs:
+#  curl:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: curl
+#      id: api
+#      uses: wei/curl@master
+#      with:
+#        args: https://api.github.com/repos/flooie/sampleproject/tags
+#    - name: 'Use response'
+#        run: echo ${{ steps.api }}
+
+name: Example of cURL action
+
+on: [ push ]
+jobs:
+    test-curl-action:
+        name: 'Perform REST API'
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Call API'
+              uses: indiesdev/curl@v1
+              id: api
+              with:
+                url: https://api.github.com/repos/flooie/sampleproject/tags
+                method: 'GET'
+                accept: 200
+            - name: 'Use response'
+              run: |
+                echo ${{ steps.api.outputs.response }}
+                echo "{{ toJson(steps.api.outputs.response) }}"
+                echo "{{ toJson(steps.api.outputs.response) }}"
