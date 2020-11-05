@@ -1,3 +1,5 @@
+name: Release a yml
+
 on:
   pull_request:
     types: [opened, closed]
