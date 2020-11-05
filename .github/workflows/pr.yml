@@ -35,6 +35,7 @@ jobs:
         COMMIT_MSG: ${{ github.event.head_commit.message }}
         BRANCH: ${{ github.ref }}
         GITHUB_CONTEXT: ${{ toJson(github) }}
+        LABELS: ${{ toJson(github.labels.name) }}
         ACTION: ${{ toJson(github.action) }}
         MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
 
@@ -44,6 +45,7 @@ jobs:
         echo "$GITHUB_REF"
         echo "$GITHUB_CONTEXT"
         echo "this shouldnt run"
+        echo "$LABELS"
 
   final:
     runs-on: ubuntu-latest
