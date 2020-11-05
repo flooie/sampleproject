@@ -4,8 +4,7 @@ on:
     tags:
       - v*.*.*
   pull_request:
-    tags:
-      - v*.*.*
+
 
 jobs:
   build:
