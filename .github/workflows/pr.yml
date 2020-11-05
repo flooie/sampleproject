@@ -33,9 +33,9 @@ jobs:
         COMMIT_MSG: ${{ github.event.head_commit.message }}
         BRANCH: ${{ github.ref }}
         GITHUB_CONTEXT: ${{ toJson(github) }}
-        PRs: ${{ github.event.pull_request }}
-        LABELS: ${{ github.event.pull_request.labels }}
-        NAMES: ${{ github.event.pull_request.labels.name }}
+        PRs: ${{ toJson(github.event.pull_request) }}
+        LABELS: ${{ toJson(github.event.pull_request.labels) }}
+        NAMES: ${{ toJson(github.event.pull_request.labels.name) }}
         ACTION: ${{ toJson(github.action) }}
         MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
 
