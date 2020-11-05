@@ -35,22 +35,26 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
         PRs: ${{ toJson(github.event.pull_request) }}
         LABELS: ${{ toJson(github.event.pull_request.labels) }}
+        LABELSI: ${{ toJson(github.event.pull_request.labels[0]) }}
+        LABELSII: ${{ toJson(github.event.pull_request.labels[0].name) }}
         NAMES: ${{ toJson(github.event.pull_request.labels.name) }}
         ACTION: ${{ toJson(github.action) }}
         MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
 
       run: |
         echo "----run it----"
-        echo "full context = $GITHUB_CONTEXT"
-        echo "commit msg = $COMMIT_MSG"
-        echo "Branch = $BRANCH"
-        echo "Ref = $GITHUB_REF"
+#        echo "full context = $GITHUB_CONTEXT"
+#        echo "commit msg = $COMMIT_MSG"
+#        echo "Branch = $BRANCH"
+#        echo "Ref = $GITHUB_REF"
         echo "labels = $LABELS"
-        echo "EVENTs = $EVENT"
-        echo "PRs = $PRs"
-        echo "NAMEs = $NAMES"
-        echo "ACTIONs = $ACTION"
-        echo "MERGE_STATUSes = $MERGE_STATUS"
+        echo "labelsI = $LABELSI"
+        echo "labelsII = $LABELSII"
+#        echo "EVENTs = $EVENT"
+#        echo "PRs = $PRs"
+#        echo "NAMEs = $NAMES"
+#        echo "ACTIONs = $ACTION"
+#        echo "MERGE_STATUSes = $MERGE_STATUS"
 
   final:
     runs-on: ubuntu-latest
