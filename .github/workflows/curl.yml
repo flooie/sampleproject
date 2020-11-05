@@ -18,6 +18,8 @@
 #        echo "::set-output name=tag-hash::${hash}"
 #
 ##https://api.github.com/repos/flooie/sampleproject/tags
+on:
+  push:
 
 uses: satak/webrequest-action@master
 with:
