@@ -18,6 +18,8 @@
 #        echo "::set-output name=tag-hash::${hash}"
 #
 ##https://api.github.com/repos/flooie/sampleproject/tags
+
+name: Check Deployment and versions
 on:
   push:
 
