@@ -1,6 +1,6 @@
 name: Release
 on:
-  pull_request:
+  push:
     tags:
       - v*.*.*
 jobs:
@@ -20,4 +20,3 @@ jobs:
         echo "$GITHUB_CONTEXT"
 
 
-#okay lets add a version type
