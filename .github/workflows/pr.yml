@@ -26,7 +26,7 @@ jobs:
 
   more:
     runs-on: ubuntu-latest
-    if: toJson(github.event.pull_request.labels[0].name) == "versionbump"
+    if: github.event.pull_request.merged == false
     steps:
     - name: Print false
       env:
@@ -40,6 +40,8 @@ jobs:
         NAMES: ${{ toJson(github.event.pull_request.labels.name) }}
         ACTION: ${{ toJson(github.action) }}
         MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
+
+    if $LABELSII == "versionbump"
 
       run: |
         echo "----run it----"
