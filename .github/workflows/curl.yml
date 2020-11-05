@@ -51,6 +51,4 @@ jobs:
                 body: '{ "name": "breeze",  "job": "devops" }'
             - name: 'Use response'
               run: |
-                echo ${{ steps.api.outputs.response }}
-                echo ${{ steps.api.outputs.response[0] }}
                 echo ${{ steps.api.outputs.response[0].name }}
