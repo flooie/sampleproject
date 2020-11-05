@@ -48,7 +48,8 @@ jobs:
                 url: https://api.github.com/repos/flooie/sampleproject/tags
                 method: 'GET'
                 accept: 200
-                body: '{ "name": "breeze",  "job": "devops" }'
             - name: 'Use response'
               run: |
-                echo ${{ steps.api.outputs.response[0].name }}
+                echo ${{ steps.api.outputs.response }}
+                echo "{{ toJson(steps.api.outputs.response) }}"
+                echo "{{ toJson(steps.api.outputs.response) }}"
