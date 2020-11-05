@@ -31,7 +31,19 @@ jobs:
     if: github.event.pull_request.merged == false
     steps:
     - name: Print false
-      run: echo "false"
+      env:
+        COMMIT_MSG: ${{ github.event.head_commit.message }}
+        BRANCH: ${{ github.ref }}
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+        ACTION: ${{ toJson(github.action) }}
+        MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
+
+      run: |
+        echo "false"
+        echo "$BRANCH"
+        echo "$GITHUB_REF"
+        echo "$GITHUB_CONTEXT"
+        echo "this shouldnt run"
 
   final:
     runs-on: ubuntu-latest
