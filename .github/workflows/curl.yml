@@ -19,16 +19,35 @@
 #
 ##https://api.github.com/repos/flooie/sampleproject/tags
 
-name: Check Deployment and versions
-on: push
+#name: Check Deployment and versions
+#on: push
+#jobs:
+#  curl:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: curl
+#      id: api
+#      uses: wei/curl@master
+#      with:
+#        args: https://api.github.com/repos/flooie/sampleproject/tags
+#    - name: 'Use response'
+#        run: echo ${{ steps.api }}
+
+name: Example of cURL action
+
+on: [ push ]
 jobs:
-  curl:
-    runs-on: ubuntu-latest
-    steps:
-    - name: curl
-      id: api
-      uses: wei/curl@master
-      with:
-        args: https://api.github.com/repos/flooie/sampleproject/tags
-    - name: 'Use response'
-        run: echo ${{ steps.api }}
+    test-curl-action:
+        name: 'Perform REST API'
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Call API'
+              uses: indiesdev/curl@v1
+              id: api
+              with:
+                url: https://api.github.com/repos/flooie/sampleproject/tags
+                method: 'GET'
+                accept: 201
+                body: '{ "name": "breeze",  "job": "devops" }'
+            - name: 'Use response'
+              run: echo ${{ steps.api.outputs.response }}
