@@ -8,7 +8,22 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
     steps:
-    - name: Print SUCCESS
+    - name: Print SUCCESS I
+      env:
+        COMMIT_MSG: ${{ github.event.head_commit.message }}
+        BRANCH: ${{ github.ref }}
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+        ACTION: ${{ toJson(github.action) }}
+        MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
+
+      run: |
+        echo "$GITHUB_CONTEXT"
+
+
+  build2:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print SUCCESS II
       env:
         COMMIT_MSG: ${{ github.event.head_commit.message }}
         BRANCH: ${{ github.ref }}
