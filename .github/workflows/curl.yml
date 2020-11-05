@@ -22,11 +22,12 @@
 name: Check Deployment and versions
 on:
   push:
-
-uses: satak/webrequest-action@master
-with:
-  url: https://api.github.com/repos/flooie/sampleproject/tags
-  method: GET
-  run: |
-    $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
-    echo "$output"
+jobs:
+  check-tag-branch:
+  uses: satak/webrequest-action@master
+  with:
+    url: https://api.github.com/repos/flooie/sampleproject/tags
+    method: GET
+    run: |
+      $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
+      echo "$output"
