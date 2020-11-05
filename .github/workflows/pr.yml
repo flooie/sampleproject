@@ -33,7 +33,6 @@ jobs:
         COMMIT_MSG: ${{ github.event.head_commit.message }}
         BRANCH: ${{ github.ref }}
         GITHUB_CONTEXT: ${{ toJson(github) }}
-        EVENT: ${{ github.event }}
         PRs: ${{ github.event.pull_request }}
         LABELS: ${{ github.event.pull_request.labels }}
         NAMES: ${{ github.event.pull_request.labels.name }}
