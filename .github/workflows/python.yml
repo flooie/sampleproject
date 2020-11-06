@@ -45,9 +45,6 @@ jobs:
 #            build: true
 #        if: steps.vars.outputs.continue == 'True'
 
-  more:
-    runs-on: ubuntu-latest
-    if: py.steps.vars.outputs.continue == 'True'
-    steps:
+    if: steps.vars.outputs.continue == 'True'
     - name: Print false
       run: echo "false"
