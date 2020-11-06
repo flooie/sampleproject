@@ -13,7 +13,7 @@ jobs:
           import os, json, urllib
           context = json.loads(os.environ['GITHUB_CONTEXT'])
           sha1 = context["sha"]
-          if context["ref"] == "refs/heads/newmaster":
+          if context["ref"] != "refs/heads/newmaster":
             tags = urllib.urlopen("https://api.github.com/repos/flooie/sampleproject/tags").read()
             j_tags = json.loads(tags)
             print(j_tags)
