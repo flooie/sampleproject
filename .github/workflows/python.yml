@@ -44,16 +44,16 @@ jobs:
 
           if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
             if pattern.match(tag_name) is not None:
-              subprocess.call('echo ::set-output name=continue::True', shell=True)
+              subprocess.call('echo ::set-env name=HIT::True', shell=True)
 
       - name: PyPI release!
-        if: steps.vars.outputs.continue == 'True'
+        if: steps.vars.outputs.HIT == 'True'
         uses: casperdcl/deploy-pypi@v1
         with:
           password: ${{ secrets.pypi_token }}
           build: true
 
       - name: Not a PyPI release.
-        if: steps.vars.outputs.continue == 'False'
+        if: steps.vars.outputs.HIT == 'False'
         run: |
           echo "Not a PyPI release"
