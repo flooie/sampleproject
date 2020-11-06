@@ -1,6 +1,8 @@
 name: Python
 on:
   push:
+  pull_request:
+
 
 jobs:
   py:
@@ -13,9 +15,8 @@ jobs:
           import os, json, urllib
           context = json.loads(os.environ['GITHUB_CONTEXT'])
           current_sha1 = context["sha"]
-          tags = urllib.urlopen("https://api.github.com/repos/flooie/sampleproject/tags").read()
-          j_tags = json.loads(tags)
-          tagged_sha1 = j_tags[0]['commit']['sha']
+          tags = json.loads(urllib.urlopen("https://api.github.com/repos/flooie/sampleproject/tags").read())
+          tagged_sha1 = tags[0]['commit']['sha']
           if tagged_sha1 == current_sha1:
             print(tagged_sha1, "==", current_sha1)
             print("This branch is tagged aaaaaand is the branch we want RUN PYPI...")
