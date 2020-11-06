@@ -26,10 +26,14 @@ jobs:
             print("this push was not tagged so - no need to pypi it")
             print(context["ref"])
 
-          for commit in context['event']['commits']:
-            print(commit['id'], "<-------")
-            if commit['id'] == tagged_sha1:
-              print("tagged ID was in the most recent PR and should be sent to PyPI")
-              break
+          ids = [x['id'] for x in context['event']['commits']]
+          if tagged_sha1 in ids:
+            print("tagged ID was in the most recent PR and should be sent to PyPI")
+
+#          for commit in context['event']['commits']:
+#            print(commit['id'], "<-------")
+#            if commit['id'] == tagged_sha1:
+#              print("tagged ID was in the most recent PR and should be sent to PyPI")
+#              break
 
         shell: python
