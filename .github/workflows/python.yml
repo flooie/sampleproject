@@ -19,6 +19,8 @@ jobs:
             print(j_tags)
             print(j_tags[0]['name'])
             print(j_tags[0]['commit']['sha'])
+          else:
+            print(context["ref"])
 
           print(sha1)
         shell: python
