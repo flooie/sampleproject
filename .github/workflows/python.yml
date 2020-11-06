@@ -17,15 +17,13 @@ jobs:
         run: |
           import os
           import json
-          import urllib.request
+          import urllib
 
           context = json.loads(os.environ['GITHUB_CONTEXT'])
 
           if context["ref"] == "refs/heads/newmaster":
             print("OK")
-            contents = urllib.request.urlopen("http://example.com/foo/bar").read()
-            print(contents)
-
+            print("urllib is in the system")
 
 
         shell: python
