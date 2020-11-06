@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: My first step
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event.head_commit.message == 'Move workflows' }}
         run: echo This event is a pull request that had an assignee removed.
 
 #    if: github.event.pull_request.merged == false
