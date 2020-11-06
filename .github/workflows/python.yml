@@ -47,7 +47,7 @@ jobs:
 
   more:
     runs-on: ubuntu-latest
-    if: steps.vars.outputs.continue == 'True'
+    if: py.steps.vars.outputs.continue == 'True'
     steps:
     - name: Print false
       run: echo "false"
