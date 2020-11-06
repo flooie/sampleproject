@@ -34,7 +34,7 @@ jobs:
               print("tagged ID was in the most recent PR and should be sent to PyPI")
               print("Submit", tag_name, " to PyPI")
 
-        shell: python
+
 
       - name: Build PYPI
         uses: actions/checkout@v2
