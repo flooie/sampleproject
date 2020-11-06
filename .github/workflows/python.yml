@@ -1,0 +1,29 @@
+name: Python
+on:
+  push:
+  pull_request:
+
+
+jobs:
+  py:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display the path
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          import os, json, urllib
+          context = json.loads(os.environ['GITHUB_CONTEXT'])
+          current_sha1 = context["sha"]
+          tags = json.loads(urllib.urlopen("https://api.github.com/repos/flooie/sampleproject/tags").read())
+          tagged_sha1 = tags[0]['commit']['sha']
+          if tagged_sha1 == current_sha1:
+            print(tagged_sha1, "==", current_sha1)
+            print("This branch is tagged aaaaaand is the branch we want RUN PYPI...")
+            print(context)
+          else:
+            print("this push was not tagged so - no need to pypi it")
+            print(context["ref"])
+
+
+        shell: python
