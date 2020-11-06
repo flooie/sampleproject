@@ -1,0 +1,70 @@
+#name: Release
+#on:
+#  push:
+#    tags:
+#      - v*.*.*
+#  pull_request:
+#
+#
+#jobs:
+##  build:
+##    runs-on: ubuntu-latest
+##    if: github.event.pull_request.merged == true
+##    steps:
+##    - name: Print SUCCESS
+##      env:
+##        COMMIT_MSG: ${{ github.event.head_commit.message }}
+##        BRANCH: ${{ github.ref }}
+##        GITHUB_CONTEXT: ${{ toJson(github) }}
+##        ACTION: ${{ toJson(github.action) }}
+##        MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
+##
+##      run: |
+##        echo "$BRANCH"
+##        echo "$GITHUB_CONTEXT"
+##        echo "<------->"
+##
+#  more:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: SEND TO PYPI
+#      env:
+#        VB: ${{ toJson(github.event.pull_request.labels[0].name) }}
+#      if: contains(env.VB, 'versionbump')
+#      run: |
+#        echo "----run it----"
+#        echo "PR contains version bump send to PYPI"
+#        echo "VB = $VB"
+#
+#
+#
+##  final:
+##    runs-on: ubuntu-latest
+##    steps:
+##    - name: My first step
+##      if: {{ toJson(github.event.pull_request.labels[0].name) == 'versionbump' }}
+##      run: echo "asdfasfasdfasdf"
+#
+##    if: github.event.pull_request.merged == false
+##    steps:
+##    - name: Print false
+##      env:
+##        COMMIT_MSG: ${{ github.event.head_commit.message }}
+##        BRANCH: ${{ github.ref }}
+##        GITHUB_CONTEXT: ${{ toJson(github) }}
+##        PRs: ${{ toJson(github.event.pull_request) }}
+##        LABELS: ${{ toJson(github.event.pull_request.labels) }}
+##        LABELSI: ${{ toJson(github.event.pull_request.labels[0]) }}
+##        LABELSII: ${{ toJson(github.event.pull_request.labels[0].name) }}
+##        NAMES: ${{ toJson(github.event.pull_request.labels.name) }}
+##        ACTION: ${{ toJson(github.action) }}
+##        MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
+##
+###       if: ${{ github.event_name == 'push' }}
+##       run: echo This event is a pull request that had an assignee removed.
+#
+##      run: |
+##        echo "----run it----"
+##        echo "labels = $LABELS"
+##        echo "labelsI = $LABELSI"
+##        echo "labelsII = $LABELSII"
