@@ -7,13 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Read package.json
-        id: package
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ../../package.json
+        run: |
+          import os, glob
+          print(os)
+          print(glob.glob("*"))
 
-      - name: Echo package.json
-        run: echo ${{ steps.package.outputs.content }}
 
       - name: Display the path
         env:
