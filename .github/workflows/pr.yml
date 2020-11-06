@@ -26,27 +26,14 @@ jobs:
 #
   more:
     runs-on: ubuntu-latest
-#    if: github.event.pull_request.merged == false
     steps:
     - name: Print false
       env:
-#        COMMIT_MSG: ${{ github.event.head_commit.message }}
-#        BRANCH: ${{ github.ref }}
-#        GITHUB_CONTEXT: ${{ toJson(github) }}
-#        PRs: ${{ toJson(github.event.pull_request) }}
-#        LABELS: ${{ toJson(github.event.pull_request.labels) }}
-#        LABELSI: ${{ toJson(github.event.pull_request.labels[0]) }}
         VB: ${{ toJson(github.event.pull_request.labels[0].name) }}
-#        NAMES: ${{ toJson(github.event.pull_request.labels.name) }}
-#        ACTION: ${{ toJson(github.action) }}
-#        MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
-#
+      if: contains(env.VB, 'versionbump') && contains(env.COMMIT_MESSAGE, 'Move workflows')
       run: |
         echo "----run it----"
-        echo "cv = $VB"
-#        echo "labelsI = $LABELSI"
-#        echo "labelsII = $LABELSII"
-#        echo "labelsII = $BRANCH"
+        echo "VB = $VB"
 
 
 
@@ -54,10 +41,8 @@ jobs:
 #    runs-on: ubuntu-latest
 #    steps:
 #    - name: My first step
-#      env:
-#        VB: ${{ toJson(github.event.pull_request.labels[0].name) }}
-#      if: {{ github.event_name == 'pull_request' }}
-#      run: echo "vb = $VB"
+#      if: {{ toJson(github.event.pull_request.labels[0].name) == 'versionbump' }}
+#      run: echo "asdfasfasdfasdf"
 
 #    if: github.event.pull_request.merged == false
 #    steps:
