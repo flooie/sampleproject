@@ -42,6 +42,7 @@ jobs:
       - name: Generate PYPI
         run: |
           echo {{ env.SUCCESSFUL }}
+          echo env.SUCCESSFUL
 
 #          import os
 #          other_title = os.environ['success']
