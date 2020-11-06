@@ -1,13 +1,16 @@
 name: PyPI
 
-on: [ push ]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   test-I:
     name: 'PyPI'
     runs-on: ubuntu-latest
     steps:
-      - name: Should we Send to PyPI
+      - name: Check Tags
         shell: python
         id: vars
         env:
