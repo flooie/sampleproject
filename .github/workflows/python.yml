@@ -42,6 +42,7 @@ jobs:
       - name: Create Pull Request
         run: echo "PR_TITLE=[Test] Add report file $(date +%d-%m-%Y)" >> $GITHUB_ENV
 
+      if: ${{ success }}
       - name: Print PRTITLE
         shell: python
         run: |
@@ -50,6 +51,7 @@ jobs:
           other_title = os.environ['success']
           print(PR_TITLE)
           print(other_title)
+
 
 
 #        run: |
