@@ -66,8 +66,8 @@ jobs:
         ACTION: ${{ toJson(github.action) }}
         MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
 
-     if: ${{ github.event_name == 'push' }}
-     run: echo This event is a pull request that had an assignee removed.
+       if: ${{ github.event_name == 'push' }}
+       run: echo This event is a pull request that had an assignee removed.
 
 #      run: |
 #        echo "----run it----"
