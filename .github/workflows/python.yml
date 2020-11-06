@@ -1,12 +1,12 @@
 # To explain this convoluted action.  We are trying to allow PR merges
-# into master/main & pushes directly into master/main with a version tag
+# into master & pushes directly into master with a version tag
 # (e.g. "v0.0.0") to automatically build and push to pypi.  This is more
 # complicated than one would immediately presume because PRs mergers
 # are technically pushes, tagging a commit and than PRing it removes the tag
 # from the context you can immediately pull up and changes after the tag
 # during a review, for example, would move the tag down the commit list.
 
-# What we do is this.  If a Push to master/main is tagged with our tag,
+# What we do is this.  If a Push to master is tagged with our tag,
 # we validate the format and send to PyPI.
 
 # If a PR is closed and merged, we have to query the tags information and check
@@ -18,11 +18,10 @@ name: PyPI
 on:
   push:
     branches:
-      - main
       - master
 
 jobs:
-  test-I:
+  run-pypi:
     name: 'PyPI'
     runs-on: ubuntu-latest
     steps:
@@ -41,15 +40,11 @@ jobs:
 
           tagged_sha1 = tags[0]['commit']['sha']
           tag_name = tags[0]['name']
-
-          default = context['event']['repository']['default_branch']
-          branch = context['ref']
           pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
 
-          if default in branch:
-            if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
-              if pattern.match(tag_name) is not None:
-                subprocess.call('echo ::set-output name=continue::True', shell=True)
+          if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
+            if pattern.match(tag_name) is not None:
+              subprocess.call('echo ::set-output name=continue::True', shell=True)
 
       - name: PyPI release!
         if: steps.vars.outputs.continue == 'True'
