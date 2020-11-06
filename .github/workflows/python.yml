@@ -16,9 +16,10 @@ jobs:
 
         run: |
           import os
+          import json
           gc = os.environ['GITHUB_CONTEXT']
-
-          print(gc[0])
+          gc_json = json.load(gc)
+          print(gc_json["ref"])
 
 
         shell: python
