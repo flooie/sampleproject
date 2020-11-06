@@ -10,7 +10,7 @@ jobs:
         run: |
           import os, glob
           print(os)
-          print(glob.glob("*.json"))
+          print(glob.glob(os.getcwd() + "/*"))
           print(os.getcwd())
 
         shell: python
