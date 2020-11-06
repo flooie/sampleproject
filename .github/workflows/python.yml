@@ -35,12 +35,12 @@ jobs:
             if tagged_sha1 in ids:
               print("tagged ID was in the most recent PR and should be sent to PyPI")
               print("Submit", tag_name, " to PyPI")
-              subprocess.call('echo "success=True" >> $GITHUB_ENV', shell=True)
+              subprocess.call('echo "SUCCESSFUL=True" >> $GITHUB_ENV', shell=True)
           else:
-            subprocess.call('echo "success=False" >> $GITHUB_ENV', shell=True)
+            subprocess.call('echo "SUCCESSFUL=False" >> $GITHUB_ENV', shell=True)
 
       - name: Generate PYPI
-        if: {{ env.success == "True" }}
+        if: {{ env.SUCCESSFUL == True }}
         run: |
           echo "adsfadsfasdfasdf"
 
