@@ -50,14 +50,14 @@ jobs:
 
 
 
-#  final:
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: My first step
+  final:
+    runs-on: ubuntu-latest
+    steps:
+    - name: My first step
 #      env:
 #        VB: ${{ toJson(github.event.pull_request.labels[0].name) }}
-#      if: {{ github.event_name == 'pull_request' }}
-#      run: echo "vb = $VB"
+      if: {{ toJson(github.event.pull_request.labels[0].name) == 'versionbump' }}
+      run: echo "asdfasfasdfasdf"
 
 #    if: github.event.pull_request.merged == false
 #    steps:
