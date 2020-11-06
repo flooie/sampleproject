@@ -20,6 +20,9 @@ jobs:
             print(j_tags[0]['name'])
             print(j_tags[0]['commit']['sha'])
           else:
+            tags = urllib.urlopen("https://api.github.com/repos/flooie/sampleproject/tags").read()
+            j_tags = json.loads(tags)
+
             print(context["ref"])
 
           print(sha1)
