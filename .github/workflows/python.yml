@@ -26,6 +26,7 @@ jobs:
             print(tagged_sha1)
             print("this push was not tagged so - no need to pypi it")
             print(context["ref"])
+            print(context)
 
 
         shell: python
