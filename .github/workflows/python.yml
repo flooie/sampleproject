@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check tags on this PR
+      - uses: actions/checkout@v2
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
@@ -34,12 +35,14 @@ jobs:
               print("tagged ID was in the most recent PR and should be sent to PyPI")
               print("Submit", tag_name, " to PyPI")
 
+        shell: python
 
 
       - name: Build PYPI
-        uses: actions/checkout@v2
         run: |
           print("OKOKKOKOOK")
+          print(tag_url)
+
         shell: python
 
 #  build:
