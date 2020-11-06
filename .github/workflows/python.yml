@@ -40,7 +40,6 @@ jobs:
       - name: Build PYPI
         run: |
           print("OKOKKOKOOK")
-          print(tag_url)
 
         shell: python
 
