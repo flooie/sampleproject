@@ -17,13 +17,13 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
         ACTION: ${{ toJson(github.action) }}
         MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
-    - name: two
-    if "$COMMIT_MSG" != "Move workflows"
-
+    - name: Next
+      if "$LABELSII" != "versionbump"
       run: |
-        echo "$BRANCH"
-        echo "$GITHUB_CONTEXT"
-        echo "<------->"
+        echo "----run it----"
+        echo "labels = $LABELS"
+        echo "labelsI = $LABELSI"
+        echo "labelsII = $LABELSII"
 
   more:
     runs-on: ubuntu-latest
