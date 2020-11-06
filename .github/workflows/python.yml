@@ -38,10 +38,11 @@ jobs:
 
       - name: Create Pull Request
         shell: python
-        run: |
-          import os, json, urllib
-          print("OKOOKKOOK")
-          print(os.environ['steps'])
+        run: echo ${{ steps.vars.outputs }}
+#        run: |
+#          import os, json, urllib
+#          print("OKOOKKOOK")
+#          print(os.environ['steps'])
 
 #      - name: Build PYPI
 #        run: |
