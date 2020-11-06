@@ -41,6 +41,7 @@ jobs:
         run: |
           import os, json, urllib
           print("OKOOKKOOK")
+          print(os.environ['steps'])
 
 #      - name: Build PYPI
 #        run: |
