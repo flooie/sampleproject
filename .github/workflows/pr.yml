@@ -30,7 +30,7 @@ jobs:
     - name: Print false
       env:
         VB: ${{ toJson(github.event.pull_request.labels[0].name) }}
-      if: contains(env.VB, 'versionbump')
+#      if: contains(env.VB, 'versionbump')
       run: |
         echo "----run it----"
         echo "VB = $VB"
