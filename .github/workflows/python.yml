@@ -16,10 +16,9 @@ jobs:
           current_sha1 = context["sha"]
           tags = json.loads(urllib.urlopen("https://api.github.com/repos/flooie/sampleproject/tags").read())
           tagged_sha1 = tags[0]['commit']['sha']
-          ids = [id for id in context['event']['commits']]
-          if tagged_sha1 in ids:
-            print("HIT")
-            print("We have a PR with a PyPI tag inside of it and we need to send it off")
-            print(tags[0]['commit']['name'])
+          for commit in context['event']['commits']:
+            if commit['id'] == tagged_sha1:
+              print("tagged ID was in the most recent PR and should be sent to PyPI")
+              break
 
         shell: python
