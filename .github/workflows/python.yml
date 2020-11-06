@@ -17,9 +17,14 @@ jobs:
         run: |
           import os
           import json
-          gc = os.environ['GITHUB_CONTEXT']
-          gc_json = json.loads(gc)
-          print(gc_json["ref"])
+          context = json.loads(os.environ['GITHUB_CONTEXT'])
+
+          print(context["ref"])
+          print(context["ref"])
+          if context["ref"] == "refs/heads/newmaster":
+            print("OK")
+
+
 
 
         shell: python
