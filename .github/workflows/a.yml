@@ -3,18 +3,18 @@ name: Python
 on: [ push ]
 jobs:
     test-I:
-        name: 'Perform REST API'
+        name: 'PyPI'
         runs-on: ubuntu-latest
         steps:
           - name: 'Check tags on this PR'
             shell: python
             id: vars
             env:
-              GITHUB_CONTEXT: ${{ toJson(github) }}
+              CONTEXT: ${{ toJson(github) }}
             run: |
               import os, json, urllib, subprocess
 
-              context = json.loads(os.environ['GITHUB_CONTEXT'])
+              context = json.loads(os.environ['CONTEXT'])
               tag_url = context['event']['repository']['tags_url']
               tags = json.loads(urllib.urlopen(tag_url).read())
 
@@ -34,7 +34,7 @@ jobs:
                 subprocess.call('echo ::set-output name=continue::False', shell=True)
 
           - name: Send to PyPI
-            if: False
+            if: steps.vars.outputs.continue == 'True'
             uses: casperdcl/deploy-pypi@v1
             with:
               password: ${{ secrets.pypi_token }}
