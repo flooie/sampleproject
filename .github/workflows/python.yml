@@ -1,0 +1,15 @@
+name: Python
+on:
+  push:
+    tags:
+      - v*.*.*
+  pull_request:
+
+steps:
+  - name: Display the path
+    run: |
+      import os
+      print(os.environ['PATH'])
+      pip install requests
+      print(requests)
+    shell: python

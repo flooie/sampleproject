@@ -1,8 +1,8 @@
 name: Release
 on:
   push:
-#    tags:
-#      - v*.*.*
+    tags:
+      - v*.*.*
   pull_request:
 
 
@@ -27,7 +27,7 @@ jobs:
   more:
     runs-on: ubuntu-latest
     steps:
-    - name: Print false
+    - name: SEND TO PYPI
       env:
         VB: ${{ toJson(github.event.pull_request.labels[0].name) }}
       if: contains(env.VB, 'versionbump')
