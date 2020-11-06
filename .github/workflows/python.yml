@@ -1,3 +1,19 @@
+#To explain this convoluted action.  We are trying to allow PR merges
+# into master/main & pushes directly into master/main with a version tag
+# (e.g. "v0.0.0") to automatically build and push to pypi.  This is more
+# complicated than one would immediately presume because PRs mergers
+# are technically pushes, tagging a commit and than PRing it removes the tag
+# from the context you can immediately pull up and changes after the tag
+# during a review, for example, would move the tag down the commit list.
+
+# What we do is this.  If a Push to master/main is tagged with our tag,
+# we validate the format and send to PyPI.
+
+# If a PR is closed and merged, we have to query the tags information and check
+# if the most recent tagged branch is inside all the commits in our current PR.
+# If the PR contains a properly formatted tag, we send to PyPI.  Additionally,
+# we check that this only happens on the default branch.
+
 name: PyPI
 
 on:
@@ -17,6 +33,7 @@ jobs:
           CONTEXT: ${{ toJson(github) }}
         run: |
           import os, json, urllib, subprocess, re
+
           subprocess.call('echo ::set-output name=continue::False', shell=True)
           context = json.loads(os.environ['CONTEXT'])
           tag_url = context['event']['repository']['tags_url']
@@ -29,13 +46,9 @@ jobs:
           branch = context['ref']
           pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
 
-          print(pattern.match(tag_name))
-
           if default in branch:
             if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
               if pattern.match(tag_name) is not None:
-                print("tagged ID was in the most recent PR and should be sent to PyPI")
-                print("Submit", tag_name, " to PyPI")
                 subprocess.call('echo ::set-output name=continue::True', shell=True)
 
       - name: PyPI release!
