@@ -1,20 +1,21 @@
-name: Python
-on:
-  push:
+name: PyPI
+
+on: [ push ]
 
 jobs:
-  py:
+  test-I:
+    name: 'PyPI'
     runs-on: ubuntu-latest
     steps:
-      - name: Check tags on this PR
+      - name: 'Check tags on this PR'
         shell: python
         id: vars
         env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
+          CONTEXT: ${{ toJson(github) }}
         run: |
           import os, json, urllib, subprocess
 
-          context = json.loads(os.environ['GITHUB_CONTEXT'])
+          context = json.loads(os.environ['CONTEXT'])
           tag_url = context['event']['repository']['tags_url']
           tags = json.loads(urllib.urlopen(tag_url).read())
 
@@ -33,20 +34,9 @@ jobs:
           else:
             subprocess.call('echo ::set-output name=continue::False', shell=True)
 
-      - name: Generate I
+      - name: Send to PyPI
         if: steps.vars.outputs.continue == 'True'
-        run: |
-          echo "true"
-
-      - name: Generate II
-        if: steps.vars.outputs.continue == 'False'
-        run: |
-          echo "false"
-
-      - name: Generate III
-        if: steps.vars.outputs.continue == 'False'
-#      - uses: actions/checkout@v2
-#      - uses: casperdcl/deploy-pypi@v1
-#        with:
-#          password: ${{ secrets.pypi_token }}
-#          build: true
+        uses: casperdcl/deploy-pypi@v1
+        with:
+          password: ${{ secrets.pypi_token }}
+          build: true
