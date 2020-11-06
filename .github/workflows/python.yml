@@ -38,8 +38,11 @@ jobs:
 
       - name: Build PYPI
         run: |
-          print("OKOKKOKOOK")
-          print(tag_url)
+          import os, json, urllib
+          context = json.loads(os.environ['GITHUB_CONTEXT'])
+
+          print(context)
+#          print(tag_url)
 
         shell: python
 
