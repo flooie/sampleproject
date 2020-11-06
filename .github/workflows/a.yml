@@ -15,6 +15,7 @@ jobs:
                 accept: 201
                 body: '{ "name": "breeze",  "job": "devops" }'
             - name: 'Use response'
+              if: False
               uses: indiesdev/curl@v1
               id: api
               with:
@@ -22,8 +23,6 @@ jobs:
                 method: 'POST'
                 accept: 201
                 body: '{ "name": "breeze",  "job": "devops" }'
-              if: False
-              run: echo ${{ steps.api.outputs.response }}
 
 #    test-II:
 #        name: 'Perform REST APII'
