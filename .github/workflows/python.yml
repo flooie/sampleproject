@@ -11,7 +11,6 @@ on:
 jobs:
   py:
     runs-on: ubuntu-latest
-    id: CheckTAGs
     steps:
       - name: Check tags on this PR
         env:
