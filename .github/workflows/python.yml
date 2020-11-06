@@ -33,7 +33,7 @@ jobs:
 
           if default in branch:
             if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
-              if pattern.match(tag_name) == True:
+              if pattern.match(tag_name) is not None:
                 print("tagged ID was in the most recent PR and should be sent to PyPI")
                 print("Submit", tag_name, " to PyPI")
                 subprocess.call('echo ::set-output name=continue::True', shell=True)
