@@ -43,7 +43,7 @@ jobs:
         shell: python
         run: |
           import subprocess
-          subprocess.call('echo "other_title=[Test] Add report file $(date +%d-%m-%Y)" >> $GITHUB_ENV')
+          subprocess.call('echo "other_title=[Test] Add report file $(date +%d-%m-%Y)" >> $GITHUB_ENV', shell=True)
 
       - name: Print PRTITLE
         shell: python
