@@ -12,7 +12,6 @@ jobs:
   py:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Check tags on this PR
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -35,13 +34,17 @@ jobs:
               print("tagged ID was in the most recent PR and should be sent to PyPI")
               print("Submit", tag_name, " to PyPI")
 
+      - name: Build PYPI
+        run: |
+
+          print("OKOKKOKOOK")
 
         shell: python
 
 #  build:
 #    runs-on: ubuntu-latest
 #    steps:
-      - uses: actions/checkout@v2
+#      - uses: actions/checkout@v2
 #      - uses: casperdcl/deploy-pypi@v1
 #        with:
 #          password: ${{ secrets.pypi_token }}
