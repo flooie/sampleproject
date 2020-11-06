@@ -18,6 +18,5 @@ jobs:
           import os
           print(os.environ['PATH'])
           print(os.environ['BRANCH'])
-#          print(BRANCH)
           print(1 + 1 + 1)
         shell: python
