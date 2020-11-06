@@ -55,7 +55,7 @@ jobs:
     steps:
       - name: My first step
         env:
-        VB: ${{ toJson(github.event.pull_request.labels[0].name) }}
+          VB: ${{ toJson(github.event.pull_request.labels[0].name) }}
         if: {{ github.event_name == 'pull_request' }}
         run: echo "vb = $VB"
 
