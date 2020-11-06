@@ -1,4 +1,4 @@
-#To explain this convoluted action.  We are trying to allow PR merges
+# To explain this convoluted action.  We are trying to allow PR merges
 # into master/main & pushes directly into master/main with a version tag
 # (e.g. "v0.0.0") to automatically build and push to pypi.  This is more
 # complicated than one would immediately presume because PRs mergers
@@ -15,11 +15,11 @@
 # we check that this only happens on the default branch.
 
 name: PyPI
-
 on:
   push:
     branches:
       - main
+      - master
 
 jobs:
   test-I:
