@@ -46,14 +46,28 @@ jobs:
         echo "labels = $LABELS"
         echo "labelsI = $LABELSI"
         echo "labelsII = $LABELSII"
+        echo "labelsII = $BRANCH"
 
 
   final:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == false
     steps:
     - name: Print false
-      run: echo "true its true and lets say  can this work without a tag?"
+      env:
+        COMMIT_MSG: ${{ github.event.head_commit.message }}
+        BRANCH: ${{ github.ref }}
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+        PRs: ${{ toJson(github.event.pull_request) }}
+        LABELS: ${{ toJson(github.event.pull_request.labels) }}
+        LABELSI: ${{ toJson(github.event.pull_request.labels[0]) }}
+        LABELSII: ${{ toJson(github.event.pull_request.labels[0].name) }}
+        NAMES: ${{ toJson(github.event.pull_request.labels.name) }}
+        ACTION: ${{ toJson(github.action) }}
+        MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
 
-
-#  OK asdfasdfsa
+      run: |
+        echo "----run it----"
+        echo "labels = $LABELS"
+        echo "labelsI = $LABELSI"
+        echo "labelsII = $LABELSII"
