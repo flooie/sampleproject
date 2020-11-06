@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check tags on this PR
-      - env:
+        env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-      - run: |
+        run: |
           import os, json, urllib
 
           context = json.loads(os.environ['GITHUB_CONTEXT'])
@@ -33,16 +33,15 @@ jobs:
             if tagged_sha1 in ids:
               print("tagged ID was in the most recent PR and should be sent to PyPI")
               print("Submit", tag_name, " to PyPI")
-
-      - shell: python
+        shell: python
 
 
       - name: Build PYPI
-      - run: |
+        run: |
           print("OKOKKOKOOK")
           print(tag_url)
 
-      - shell: python
+        shell: python
 
 #  build:
 #    runs-on: ubuntu-latest
