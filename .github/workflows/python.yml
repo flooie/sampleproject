@@ -41,7 +41,7 @@ jobs:
 
 
       - name: Generate PYPI
-        if: steps.check.outputs.continue == 'yes'
+        if: steps.vars.outputs.continue == 'yes'
         run: |
           echo "adsfadsfasdfasdf"
 
