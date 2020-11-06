@@ -7,23 +7,22 @@ on:
 
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Print SUCCESS
-      env:
-        COMMIT_MSG: ${{ github.event.head_commit.message }}
-        BRANCH: ${{ github.ref }}
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-        ACTION: ${{ toJson(github.action) }}
-        MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
-    - name: Next
-      if "$LABELSII" != "versionbump"
-      run: |
-        echo "----run it----"
-        echo "labels = $LABELS"
-        echo "labelsI = $LABELSI"
-        echo "labelsII = $LABELSII"
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: Print SUCCESS
+#      env:
+#        COMMIT_MSG: ${{ github.event.head_commit.message }}
+#        BRANCH: ${{ github.ref }}
+#        GITHUB_CONTEXT: ${{ toJson(github) }}
+#        ACTION: ${{ toJson(github.action) }}
+#        MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
+#      if "$LABELSII" != "versionbump"
+#      run: |
+#        echo "----run it----"
+#        echo "labels = $LABELS"
+#        echo "labelsI = $LABELSI"
+#        echo "labelsII = $LABELSII"
 
   more:
     runs-on: ubuntu-latest
