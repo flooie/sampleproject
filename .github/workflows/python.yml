@@ -18,7 +18,7 @@ jobs:
           import os
           gc = os.environ['GITHUB_CONTEXT']
 
-          print(gc['ref'])
+          print(gc[0])
 
 
         shell: python
