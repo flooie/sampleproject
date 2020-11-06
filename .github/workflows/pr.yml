@@ -49,25 +49,31 @@ jobs:
         echo "labelsII = $BRANCH"
 
 
+
   final:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == false
     steps:
-    - name: Print false
-      env:
-        COMMIT_MSG: ${{ github.event.head_commit.message }}
-        BRANCH: ${{ github.ref }}
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-        PRs: ${{ toJson(github.event.pull_request) }}
-        LABELS: ${{ toJson(github.event.pull_request.labels) }}
-        LABELSI: ${{ toJson(github.event.pull_request.labels[0]) }}
-        LABELSII: ${{ toJson(github.event.pull_request.labels[0].name) }}
-        NAMES: ${{ toJson(github.event.pull_request.labels.name) }}
-        ACTION: ${{ toJson(github.action) }}
-        MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
+      - name: My first step
+        if: ${{ github.event_name == 'push' }}
+        run: echo This event is a pull request that had an assignee removed.
 
-       if: ${{ github.event_name == 'push' }}
-       run: echo This event is a pull request that had an assignee removed.
+#    if: github.event.pull_request.merged == false
+#    steps:
+#    - name: Print false
+#      env:
+#        COMMIT_MSG: ${{ github.event.head_commit.message }}
+#        BRANCH: ${{ github.ref }}
+#        GITHUB_CONTEXT: ${{ toJson(github) }}
+#        PRs: ${{ toJson(github.event.pull_request) }}
+#        LABELS: ${{ toJson(github.event.pull_request.labels) }}
+#        LABELSI: ${{ toJson(github.event.pull_request.labels[0]) }}
+#        LABELSII: ${{ toJson(github.event.pull_request.labels[0].name) }}
+#        NAMES: ${{ toJson(github.event.pull_request.labels.name) }}
+#        ACTION: ${{ toJson(github.action) }}
+#        MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
+#
+##       if: ${{ github.event_name == 'push' }}
+#       run: echo This event is a pull request that had an assignee removed.
 
 #      run: |
 #        echo "----run it----"
