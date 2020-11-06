@@ -1,8 +1,8 @@
 name: Python
 on:
-  push:
   pull_request:
-
+    types:
+      ['closed']
 
 jobs:
   py:
