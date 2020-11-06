@@ -7,8 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Display the path
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+          BRANCH: ${{ github.ref }}
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+          ACTION: ${{ toJson(github.action) }}
+          MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
+
         run: |
           import os
           print(os.environ['PATH'])
+          print(env.BRANCH)
           print(1 + 1 + 1)
         shell: python
