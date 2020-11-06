@@ -18,6 +18,7 @@ jobs:
           import os
           import json
           import urllib
+          import urllib2
 
           context = json.loads(os.environ['GITHUB_CONTEXT'])
 
@@ -25,7 +26,7 @@ jobs:
             print("OK")
             print("urllib is in the system")
             print(urllib)
-            contents = urllib.urlopen("http://example.com/foo/bar").read()
+            contents = urllib2.urlopen("https://example.com/foo/bar").read()
             print(contents)
 
         shell: python
