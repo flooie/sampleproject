@@ -11,7 +11,7 @@ jobs:
           import os, glob
           print(os)
           print(glob.glob("*"))
-          print(os.getcwd)
+          print(os.getcwd())
 
         shell: python
 
