@@ -10,6 +10,5 @@ jobs:
         run: |
           import os
           print(os.environ['PATH'])
-          pip install requests
-          print(requests)
+          print(1 + 1 + 1)
         shell: python
