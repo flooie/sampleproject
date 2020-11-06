@@ -12,6 +12,7 @@ jobs:
           print(os)
           print(glob.glob("*"))
 
+        shell: python
 
       - name: Display the path
         env:
