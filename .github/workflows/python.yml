@@ -18,7 +18,7 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
-          import os, json, urllib
+          import os, json, urllib, subprocess
 
           context = json.loads(os.environ['GITHUB_CONTEXT'])
           tag_url = context['event']['repository']['tags_url']
@@ -35,22 +35,14 @@ jobs:
             if tagged_sha1 in ids:
               print("tagged ID was in the most recent PR and should be sent to PyPI")
               print("Submit", tag_name, " to PyPI")
-
-      - name: Create Pull Request
-        run: echo "PR_TITLE=[Test] Add report file $(date +%d-%m-%Y)" >> $GITHUB_ENV
-
-      - name: SET other title
-        shell: python
-        run: |
-          import subprocess
-          subprocess.call('echo "other_title=[Test] Add report file $(date +%d-%m-%Y)" >> $GITHUB_ENV', shell=True)
+              subprocess.call('echo "success=True" >> $GITHUB_ENV'', shell=True)
 
       - name: Print PRTITLE
         shell: python
         run: |
           import os
           PR_TITLE = os.environ['PR_TITLE']
-          other_title = os.environ['other_title']
+          other_title = os.environ['success']
           print(PR_TITLE)
           print(other_title)
 
