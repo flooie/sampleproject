@@ -24,6 +24,6 @@ jobs:
           if context["ref"] == "refs/heads/newmaster":
             print("OK")
             print("urllib is in the system")
-
+            print(urllib)
 
         shell: python
