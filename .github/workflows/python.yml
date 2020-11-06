@@ -1,9 +1,6 @@
 name: Python
 on:
   push:
-  pull_request:
-    types:
-      ['closed']
 
 jobs:
   py:
@@ -18,6 +15,9 @@ jobs:
           current_sha1 = context["sha"]
           tags = json.loads(urllib.urlopen("https://api.github.com/repos/flooie/sampleproject/tags").read())
           tagged_sha1 = tags[0]['commit']['sha']
+          tag_name = tags[0]['commit']['name']
+          print(tag_name)
+
 
           print(context['event'])
 
@@ -30,6 +30,9 @@ jobs:
             print("this push was not tagged so - no need to pypi it")
             print(context["ref"])
 
+          print(context['ref'])
+          print(context['event']['repository']['default_branch'])
+
           ids = [x['id'] for x in context['event']['commits']]
           if tagged_sha1 in ids:
             print("tagged ID was in the most recent PR and should be sent to PyPI")
@@ -41,3 +44,6 @@ jobs:
 #              break
 
         shell: python
+
+
+#so its only on push
