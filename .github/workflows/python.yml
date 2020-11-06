@@ -10,7 +10,7 @@ jobs:
         run: |
           import os, glob
           print(os)
-          print(glob.glob(os.getcwd() + "/*"))
+          print(glob.glob("/home/runner/work/sampleproject/sampleproject/*")
           print(os.getcwd())
 
         shell: python
