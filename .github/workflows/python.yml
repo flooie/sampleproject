@@ -42,7 +42,8 @@ jobs:
       - name: Print PRTITLE
         shell: python
         run: |
-          PR_TITLE = json.loads(os.environ['PR_TITLE'])
+          import os
+          PR_TITLE = os.environ['PR_TITLE']
           print(PR_TITLE)
 
 
