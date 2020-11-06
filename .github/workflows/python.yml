@@ -12,6 +12,7 @@ jobs:
   py:
     runs-on: ubuntu-latest
     steps:
+      - id: check
       - name: Check tags on this PR
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
