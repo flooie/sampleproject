@@ -2,12 +2,6 @@ name: Python
 on:
   push:
 
-#      - uses: actions/checkout@v2
-#      - uses: casperdcl/deploy-pypi@v1
-#        with:
-#          password: ${{ secrets.pypi_token }}
-#          build: true
-
 jobs:
   py:
     runs-on: ubuntu-latest
@@ -41,8 +35,8 @@ jobs:
 
       - name: Generate PYPI
         if: steps.vars.outputs.continue == 'True'
-        - uses: actions/checkout@v2
-        - uses: casperdcl/deploy-pypi@v1
-          with:
-            password: ${{ secrets.pypi_token }}
-            build: true
+      - uses: actions/checkout@v2
+      - uses: casperdcl/deploy-pypi@v1
+        with:
+          password: ${{ secrets.pypi_token }}
+          build: true
