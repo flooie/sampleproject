@@ -14,6 +14,7 @@ jobs:
           context = json.loads(os.environ['GITHUB_CONTEXT'])
           current_sha1 = context["sha"]
           tags = json.loads(urllib.urlopen("https://api.github.com/repos/flooie/sampleproject/tags").read())
+          print(tags)
           tagged_sha1 = tags[0]['commit']['sha']
           tag_name = tags[0]['commit']['name']
           print(tag_name)
