@@ -41,7 +41,7 @@ jobs:
 #        ACTION: ${{ toJson(github.action) }}
 #        MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
 #
-      if "1" == "1"
+      if: "1" == "1"
       run: |
         echo "----run it----"
         echo "VB = $VB"
