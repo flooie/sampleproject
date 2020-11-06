@@ -17,7 +17,9 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
         ACTION: ${{ toJson(github.action) }}
         MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
-      if "$COMMIT_MSG" != "Move workflows"
+    - name: two
+    if "$COMMIT_MSG" != "Move workflows"
+
       run: |
         echo "$BRANCH"
         echo "$GITHUB_CONTEXT"
