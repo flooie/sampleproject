@@ -7,7 +7,7 @@ jobs:
     name: 'PyPI'
     runs-on: ubuntu-latest
     steps:
-      - name: 'Check tags on this PR'
+      - name: Should we Send to PyPI
         shell: python
         id: vars
         env:
@@ -34,9 +34,14 @@ jobs:
           else:
             subprocess.call('echo ::set-output name=continue::False', shell=True)
 
-      - name: Send to PyPI
+      - name: PyPI release!
         if: steps.vars.outputs.continue == 'True'
         uses: casperdcl/deploy-pypi@v1
         with:
           password: ${{ secrets.pypi_token }}
           build: true
+
+      - name: Not a PyPI release.
+        if: steps.vars.outputs.continue == 'False'
+        run: |
+          echo "Not a PyPI release"
