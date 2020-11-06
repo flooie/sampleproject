@@ -40,7 +40,7 @@ jobs:
             subprocess.call('echo "success=False" >> $GITHUB_ENV', shell=True)
 
       - name: Generate PYPI
-        if: env.success == True
+        if: env.success == "True"
         run: |
           import os
           other_title = os.environ['success']
