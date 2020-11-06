@@ -42,8 +42,8 @@ jobs:
       - name: SET other title
         shell: python
         run: |
-          import os
-          os.environ['other_title'] = "other_title"
+          import subprocess
+          subprocess.call('echo "other_title=[Test] Add report file $(date +%d-%m-%Y)" >> $GITHUB_ENV')
 
       - name: Print PRTITLE
         shell: python
