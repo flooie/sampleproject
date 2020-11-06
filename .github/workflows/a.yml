@@ -15,7 +15,7 @@ jobs:
                 accept: 201
                 body: '{ "name": "breeze",  "job": "devops" }'
             - name: 'Use response'
-              if: True
+              if: False
               run: echo ${{ steps.api.outputs.response }}
 
 #    test-II:
