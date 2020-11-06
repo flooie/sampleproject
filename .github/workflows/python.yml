@@ -12,7 +12,6 @@ jobs:
         run: |
           import os, json, urllib
           context = json.loads(os.environ['GITHUB_CONTEXT'])
-          print(context)
           sha1 = context["sha"]
           if context["ref"] == "refs/heads/newmaster":
             tags = urllib.urlopen("https://api.github.com/repos/flooie/sampleproject/tags").read()
