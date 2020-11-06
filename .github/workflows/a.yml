@@ -14,15 +14,15 @@ jobs:
                 method: 'POST'
                 accept: 201
                 body: '{ "name": "breeze",  "job": "devops" }'
-            - name: 'Use response'
               if: False
-              uses: indiesdev/curl@v1
-              id: api
-              with:
-                url: https://reqres.in/api/users
-                method: 'POST'
-                accept: 201
-                body: '{ "name": "breeze",  "job": "devops" }'
+              - name: 'Use response'
+                uses: indiesdev/curl@v1
+                id: api
+                with:
+                  url: https://reqres.in/api/users
+                  method: 'POST'
+                  accept: 201
+                  body: '{ "name": "breeze",  "job": "devops" }'
 
 #    test-II:
 #        name: 'Perform REST APII'
