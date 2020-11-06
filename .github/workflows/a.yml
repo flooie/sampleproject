@@ -6,7 +6,7 @@ jobs:
         name: 'Perform REST API'
         runs-on: ubuntu-latest
         steps:
-          - name: Check tags on this PR
+          - name: 'Check tags on this PR'
             shell: python
             id: vars
             env:
