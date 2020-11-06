@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check tags on this PR
+        id: vars
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
@@ -39,10 +40,7 @@ jobs:
       - name: Build PYPI
         run: |
           import os, json, urllib
-          context = json.loads(os.environ['GITHUB_CONTEXT'])
 
-          print(context)
-#          print(tag_url)
 
         shell: python
 
