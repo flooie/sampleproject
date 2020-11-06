@@ -1,9 +1,6 @@
 name: Python
 on:
   push:
-    tags:
-      - v*.*.*
-  pull_request:
 
 jobs:
   py:
