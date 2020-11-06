@@ -33,18 +33,13 @@ jobs:
           else:
             subprocess.call('echo ::set-output name=continue::False', shell=True)
 
-#        - name: Generate PYPI
-#        if: steps.vars.outputs.continue == 'True'
-#          run: |
-#            echo "ok"
+      - name: Generate PYPI
+        if: steps.vars.outputs.continue == 'True'
+        run: |
+          echo "true"
 
-#      - uses: actions/checkout@v2
-#      - uses: casperdcl/deploy-pypi@v1
-#          with:
-#            password: ${{ secrets.pypi_token }}
-#            build: true
-#        if: steps.vars.outputs.continue == 'True'
+      - name: Generate IPYPI
+        if: steps.vars.outputs.continue == 'False'
+          run: |
+            echo "false"
 
-    if: steps.vars.outputs.continue == 'True'
-    - name: Print false
-      run: echo "false"
