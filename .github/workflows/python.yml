@@ -39,12 +39,20 @@ jobs:
       - name: Create Pull Request
         run: echo "PR_TITLE=[Test] Add report file $(date +%d-%m-%Y)" >> $GITHUB_ENV
 
+      - name: SET other title
+        shell: python
+        run: |
+          import os
+          os.environ['other_title'] = "other_title"
+
       - name: Print PRTITLE
         shell: python
         run: |
           import os
           PR_TITLE = os.environ['PR_TITLE']
+          other_title = os.environ['other_title']
           print(PR_TITLE)
+          print(other_title)
 
 
 #        run: |
