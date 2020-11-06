@@ -5,11 +5,13 @@ on:
       - v*.*.*
   pull_request:
 
-steps:
-  - name: Display the path
-    run: |
-      import os
-      print(os.environ['PATH'])
-      pip install requests
-      print(requests)
-    shell: python
+jobs:
+  py:
+    steps:
+      - name: Display the path
+        run: |
+          import os
+          print(os.environ['PATH'])
+          pip install requests
+          print(requests)
+        shell: python
