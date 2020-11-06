@@ -37,7 +37,7 @@ jobs:
               print("Submit", tag_name, " to PyPI")
 
       - name: Create Pull Request
-        shell: python
+#        shell: python
         run: echo ${{ steps.vars.outputs }}
 #        run: |
 #          import os, json, urllib
