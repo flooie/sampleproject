@@ -37,7 +37,7 @@ jobs:
         shell: python
 
       - name: Build PYPI
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         run: |
           print("OKOKKOKOOK")
         shell: python
