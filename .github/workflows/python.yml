@@ -8,23 +8,12 @@ jobs:
     steps:
       - name: Display the path
         env:
-          COMMIT_MSG: ${{ github.event.head_commit.message }}
-          BRANCH: ${{ github.ref }}
           GITHUB_CONTEXT: ${{ toJson(github) }}
-          ACTION: ${{ toJson(github.action) }}
-          MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
-
         run: |
-          import os
-          import json
-          import urllib
-
+          import os, json, urllib
           context = json.loads(os.environ['GITHUB_CONTEXT'])
-
+          print(context)
           if context["ref"] == "refs/heads/newmaster":
-            print("OK")
-            print("urllib is in the system")
-            print(urllib)
             contents = urllib.urlopen("https://example.com/foo/bar").read()
             print(contents)
 
