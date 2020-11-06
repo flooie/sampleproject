@@ -28,5 +28,7 @@ jobs:
             print(context["ref"])
             print(context)
 
+          for commit in context['event']['commits']:
+            print(commit['id'], "<-------")
 
         shell: python
