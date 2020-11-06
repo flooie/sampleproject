@@ -37,8 +37,10 @@ jobs:
               print("Submit", tag_name, " to PyPI")
 
       - name: Create Pull Request
-        with:
-          title: ${{ steps.vars.outputs }}
+        shell: python
+        run: |
+          import os, json, urllib
+          print("OKOOKKOOK")
 
 #      - name: Build PYPI
 #        run: |
