@@ -66,8 +66,11 @@ jobs:
         ACTION: ${{ toJson(github.action) }}
         MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
 
-      run: |
-        echo "----run it----"
-        echo "labels = $LABELS"
-        echo "labelsI = $LABELSI"
-        echo "labelsII = $LABELSII"
+     if: ${{ github.event_name == 'push' }}
+     run: echo This event is a pull request that had an assignee removed.
+
+#      run: |
+#        echo "----run it----"
+#        echo "labels = $LABELS"
+#        echo "labelsI = $LABELSI"
+#        echo "labelsII = $LABELSII"
