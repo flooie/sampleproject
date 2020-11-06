@@ -7,22 +7,22 @@ on:
 
 
 jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: Print SUCCESS
-#      env:
-#        COMMIT_MSG: ${{ github.event.head_commit.message }}
-#        BRANCH: ${{ github.ref }}
-#        GITHUB_CONTEXT: ${{ toJson(github) }}
-#        ACTION: ${{ toJson(github.action) }}
-#        MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
-#      if "$LABELSII" != "versionbump"
-#      run: |
-#        echo "----run it----"
-#        echo "labels = $LABELS"
-#        echo "labelsI = $LABELSI"
-#        echo "labelsII = $LABELSII"
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+    - name: Print SUCCESS
+      env:
+        COMMIT_MSG: ${{ github.event.head_commit.message }}
+        BRANCH: ${{ github.ref }}
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+        ACTION: ${{ toJson(github.action) }}
+        MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
+
+      run: |
+        echo "$BRANCH"
+        echo "$GITHUB_CONTEXT"
+        echo "<------->"
 
   more:
     runs-on: ubuntu-latest
@@ -41,8 +41,6 @@ jobs:
         ACTION: ${{ toJson(github.action) }}
         MERGE_STATUS: ${{ toJson(github.event.pull_request.merged) }}
 
-    - name: Next
-      if "$LABELSII" == "versionbump"
       run: |
         echo "----run it----"
         echo "labels = $LABELS"
@@ -52,19 +50,10 @@ jobs:
 
   final:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     steps:
-    - name: Print SUCCESS
-      env:
-        COMMIT_MSG: ${{ github.event.head_commit.message }}
-        BRANCH: ${{ github.ref }}
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-        ACTION: ${{ toJson(github.action) }}
-        MERGE_STATUS: ${{ toJson(github.pull_request.merged) }}
-      if $COMMIT_MSG == "Move workflows"
-        run: |
-          echo "$BRANCH"
-          echo "$GITHUB_CONTEXT"
-          echo "<------->"
+    - name: Print false
+      run: echo "true its true and lets say  can this work without a tag?"
 
 
 #  OK asdfasdfsa
