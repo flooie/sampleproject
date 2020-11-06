@@ -18,5 +18,10 @@ jobs:
           import os
           print(os.environ['PATH'])
           print(os.environ['BRANCH'])
-          print(1 + 1 + 1)
+          print(os.environ['GITHUB_CONTEXT'])
+          gc = os.environ['GITHUB_CONTEXT']
+
+          print(gc)
+
+
         shell: python
