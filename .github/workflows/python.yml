@@ -22,6 +22,8 @@ jobs:
             print("This branch is tagged aaaaaand is the branch we want RUN PYPI...")
             print(context)
           else:
+            print(tags)
+            print(tagged_sha1)
             print("this push was not tagged so - no need to pypi it")
             print(context["ref"])
 
