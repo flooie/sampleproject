@@ -33,7 +33,7 @@ jobs:
               else:
                 subprocess.call('echo ::set-output name=continue::False', shell=True)
 
-                - name: Send to PyPI
+            - name: Send to PyPI
             if: False
             uses: casperdcl/deploy-pypi@v1
             with:
