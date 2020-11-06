@@ -16,8 +16,8 @@ jobs:
         env:
           CONTEXT: ${{ toJson(github) }}
         run: |
-          import os, json, urllib, subprocess
-
+          import os, json, urllib, subprocess, re
+          subprocess.call('echo ::set-output name=continue::False', shell=True)
           context = json.loads(os.environ['CONTEXT'])
           tag_url = context['event']['repository']['tags_url']
           tags = json.loads(urllib.urlopen(tag_url).read())
@@ -27,15 +27,13 @@ jobs:
 
           default = context['event']['repository']['default_branch']
           branch = context['ref']
+          pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
 
-          if default in branch:
-            ids = [x['id'] for x in context['event']['commits']]
-            if tagged_sha1 in ids:
+          if default in branch && pattern.match(tag_name):
+            if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
               print("tagged ID was in the most recent PR and should be sent to PyPI")
               print("Submit", tag_name, " to PyPI")
               subprocess.call('echo ::set-output name=continue::True', shell=True)
-          else:
-            subprocess.call('echo ::set-output name=continue::False', shell=True)
 
       - name: PyPI release!
         if: steps.vars.outputs.continue == 'True'
