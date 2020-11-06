@@ -41,7 +41,7 @@ jobs:
 
       - name: Generate PYPI
         shell: python
-        if: env.success
+        if: env.success == True
         run: |
           import os
           other_title = os.environ['success']
