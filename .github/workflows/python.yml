@@ -35,7 +35,12 @@ jobs:
             if tagged_sha1 in ids:
               print("tagged ID was in the most recent PR and should be sent to PyPI")
               print("Submit", tag_name, " to PyPI")
-              subprocess.call('echo "success=True" >> $GITHUB_ENV'', shell=True)
+              subprocess.call('echo "success=True" >> $GITHUB_ENV', shell=True)
+          else:
+            subprocess.call('echo "success=False" >> $GITHUB_ENV', shell=True)
+
+      - name: Create Pull Request
+        run: echo "PR_TITLE=[Test] Add report file $(date +%d-%m-%Y)" >> $GITHUB_ENV
 
       - name: Print PRTITLE
         shell: python
