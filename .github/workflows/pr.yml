@@ -30,7 +30,7 @@ jobs:
     - name: Print false
       env:
         VB: ${{ toJson(github.event.pull_request.labels[0].name) }}
-      if: $VB == 'versionbump'
+      if: contains(env.VB, 'versionbump') && contains(env.COMMIT_MESSAGE, 'Move workflows')
       run: |
         echo "----run it----"
         echo "VB = $VB"
