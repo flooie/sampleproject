@@ -1,8 +1,7 @@
 name: Python
 on:
-  push:
   pull_request:
-
+    types: [closed]
 
 jobs:
   py:
@@ -17,16 +16,10 @@ jobs:
           current_sha1 = context["sha"]
           tags = json.loads(urllib.urlopen("https://api.github.com/repos/flooie/sampleproject/tags").read())
           tagged_sha1 = tags[0]['commit']['sha']
-          if tagged_sha1 == current_sha1:
-            print(tagged_sha1, "==", current_sha1)
-            print("This branch is tagged aaaaaand is the branch we want RUN PYPI...")
-          else:
-            print(tags)
-            print(tagged_sha1)
-            print("this push was not tagged so - no need to pypi it")
-            print(context["ref"])
-
-          for commit in context['event']['commits']:
-            print(commit['id'], "<-------")
+          ids = [id for id in context['event']['commits']]
+          if tagged_sha1 in ids:
+            print("HIT")
+            print("We have a PR with a PyPI tag inside of it and we need to send it off")
+            print(tags[0]['commit']['name'])
 
         shell: python
