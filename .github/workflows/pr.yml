@@ -54,8 +54,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: My first step
-        if: ${{ toJson(github.event.pull_request.labels[0].name) == 'versionbump' && github.event_name == 'pull_request' }}
-        run: echo This event is a pull request that had an assignee removed.
+        env:
+        VB: ${{ toJson(github.event.pull_request.labels[0].name) }}
+        if: {{ github.event_name == 'pull_request' }}
+        run: echo "vb = $VB"
 
 #    if: github.event.pull_request.merged == false
 #    steps:
