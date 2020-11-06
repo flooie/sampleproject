@@ -17,13 +17,14 @@ jobs:
         run: |
           import os
           import json
+          import urllib.request
+
           context = json.loads(os.environ['GITHUB_CONTEXT'])
 
-          print(context["ref"])
-          print(context["ref"])
           if context["ref"] == "refs/heads/newmaster":
             print("OK")
-
+            contents = urllib.request.urlopen("http://example.com/foo/bar").read()
+            print(contents)
 
 
 
