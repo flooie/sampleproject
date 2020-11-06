@@ -43,3 +43,11 @@ jobs:
         run: |
           echo "false"
 
+
+      - name: Generate IPYPII
+        if: steps.vars.outputs.continue == 'False'
+      - uses: actions/checkout@v2
+      - uses: casperdcl/deploy-pypi@v1
+        with:
+          password: ${{ secrets.pypi_token }}
+          build: true
