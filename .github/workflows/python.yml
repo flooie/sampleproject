@@ -17,12 +17,11 @@ jobs:
           tag_name = tags[0]['name']
           default = context['event']['repository']['default_branch']
           branch = context['ref']
-
           if default in branch:
             ids = [x['id'] for x in context['event']['commits']]
             if tagged_sha1 in ids:
               print("tagged ID was in the most recent PR and should be sent to PyPI")
-
+              print("Submit", tag_name, " to PyPI")
 
         shell: python
 
