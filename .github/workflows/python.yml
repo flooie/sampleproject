@@ -35,49 +35,14 @@ jobs:
             if tagged_sha1 in ids:
               print("tagged ID was in the most recent PR and should be sent to PyPI")
               print("Submit", tag_name, " to PyPI")
-              subprocess.call('echo ::set-output name=continue::yes', shell=True)
+              subprocess.call('echo ::set-output name=continue::True', shell=True)
           else:
-            subprocess.call('echo ::set-output name=continue::yes', shell=True)
-
+            subprocess.call('echo ::set-output name=continue::False', shell=True)
 
       - name: Generate PYPI
-        if: steps.vars.outputs.continue == 'yes'
-        run: |
-          echo "adsfadsfasdfasdf"
-
-
-#          import os
-#          other_title = os.environ['success']
-#          print(other_title)
-
-
-
-#        run: |
-#          import os, json, urllib
-#          print("OKOOKKOOK")
-#          print(os.environ['steps'])
-
-#      - name: Build PYPI
-#        run: |
-#          import os, json, urllib
-#
-#
-#        shell: python
-
-#  build:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - uses: casperdcl/deploy-pypi@v1
-#        with:
-#          password: ${{ secrets.pypi_token }}
-#          build: true
-
-
-#  pypi:
-#    name: Slack
-#    needs: publish # set needs only last job except this job
-#    runs-on: ubuntu-latest
-#    if: always() # set always
-#    steps:
-#
+        if: steps.vars.outputs.continue == 'True'
+        - uses: actions/checkout@v2
+        - uses: casperdcl/deploy-pypi@v1
+          with:
+            password: ${{ secrets.pypi_token }}
+            build: true
