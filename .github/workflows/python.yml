@@ -4,7 +4,6 @@ on:
 
 jobs:
   py:
-    uses: juliangruber/read-file-action@v1
     runs-on: ubuntu-latest
     steps:
       - name: Run a one-line script
