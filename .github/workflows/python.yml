@@ -36,7 +36,9 @@ jobs:
               print("tagged ID was in the most recent PR and should be sent to PyPI")
               print("Submit", tag_name, " to PyPI")
 
-
+      - name: Create Pull Request
+        with:
+          title: ${{ steps.vars.outputs }}
 
 #      - name: Build PYPI
 #        run: |
