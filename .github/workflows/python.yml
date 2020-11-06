@@ -43,8 +43,7 @@ jobs:
         run: echo "PR_TITLE=[Test] Add report file $(date +%d-%m-%Y)" >> $GITHUB_ENV
 
       - name: Print PRTITLE
-        shell: python
-        if: ${{ success }}
+        if: env.success
         run: |
           import os
           PR_TITLE = os.environ['PR_TITLE']
