@@ -1,22 +1,21 @@
 
 name: Python
-on:
-  push:
-
-
+on: [ push ]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: casperdcl/deploy-pypi@v1
-        with:
-          password: ${{ secrets.pypi_token }}
-          build: true
+    test-I:
+        name: 'Perform REST API'
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Call API'
+              uses: indiesdev/curl@v1
+        runs: |
+            echo "ok I"
 
-  buildII:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      if: 1 == 1
-      - run: echo "ok"
+    test-II:
+        name: 'Perform REST API'
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Call API'
+              uses: indiesdev/curl@v1
+        runs: |
+            echo "ok II"
