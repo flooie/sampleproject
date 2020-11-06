@@ -19,6 +19,7 @@ jobs:
           if tagged_sha1 == current_sha1:
             print(tagged_sha1, "==", current_sha1)
             print("This branch is tagged aaaaaand is the branch we want RUN PYPI...")
+            print(context)
           else:
             tags = urllib.urlopen("https://api.github.com/repos/flooie/sampleproject/tags").read()
             j_tags = json.loads(tags)
