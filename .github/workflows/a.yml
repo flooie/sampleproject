@@ -19,5 +19,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       if: 1 == 1
-      - run: |
-          echo "ok"
+      - run: echo "ok"
