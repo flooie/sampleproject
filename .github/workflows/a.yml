@@ -8,7 +8,7 @@ jobs:
         steps:
             - name: 'Call API'
               uses: indiesdev/curl@v1
-        runs: |
+        run: |
             echo "ok I"
 
     test-II:
@@ -17,5 +17,5 @@ jobs:
         steps:
             - name: 'Call API'
               uses: indiesdev/curl@v1
-        runs: |
+        run: |
             echo "ok II"
