@@ -33,7 +33,7 @@ jobs:
             if tagged_sha1 in ids:
               print("tagged ID was in the most recent PR and should be sent to PyPI")
               print("Submit", tag_name, " to PyPI")
-              return 'stop'
+              break
 
         shell: python
 
