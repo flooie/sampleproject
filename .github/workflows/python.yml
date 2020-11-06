@@ -11,12 +11,8 @@ on:
 jobs:
   py:
     runs-on: ubuntu-latest
+    id: CheckTAGs
     steps:
-      - uses: actions/checkout@v2
-      - uses: casperdcl/deploy-pypi@v1
-      - with:
-        password: ${{ secrets.pypi_token }}
-        build: true
       - name: Check tags on this PR
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -41,3 +37,20 @@ jobs:
 
         shell: python
 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: casperdcl/deploy-pypi@v1
+        with:
+          password: ${{ secrets.pypi_token }}
+          build: true
+
+
+#  pypi:
+#    name: Slack
+#    needs: publish # set needs only last job except this job
+#    runs-on: ubuntu-latest
+#    if: always() # set always
+#    steps:
+#
