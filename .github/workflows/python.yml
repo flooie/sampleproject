@@ -16,12 +16,12 @@ jobs:
 
         run: |
           import os
-          print(os.environ['PATH'])
-          print(os.environ['BRANCH'])
-          print(os.environ['GITHUB_CONTEXT'])
+#          print(os.environ['PATH'])
+#          print(os.environ['BRANCH'])
+#          print(os.environ['GITHUB_CONTEXT'])
           gc = os.environ['GITHUB_CONTEXT']
 
-          print(gc)
+          print(gc['ref'])
 
 
         shell: python
