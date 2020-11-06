@@ -2,31 +2,37 @@ name: Python
 on:
   push:
 
+#      - uses: actions/checkout@v2
+#      - uses: casperdcl/deploy-pypi@v1
+#        with:
+#          password: ${{ secrets.pypi_token }}
+#          build: true
+
 jobs:
   py:
     runs-on: ubuntu-latest
     steps:
-      - name: Read package.json
-        run: |
-          import os, glob
-          print(os)
-          print(glob.glob("/home/runner/work/sampleproject/sampleproject/*"))
-          print(os.getcwd())
-
-        shell: python
-
-      - name: Display the path
+      - uses: actions/checkout@v2
+      - uses: casperdcl/deploy-pypi@v1
+      - with:
+        password: ${{ secrets.pypi_token }}
+        build: true
+      - name: Check tags on this PR
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           import os, json, urllib
+
           context = json.loads(os.environ['GITHUB_CONTEXT'])
-          print(context)
-          tags = json.loads(urllib.urlopen("https://api.github.com/repos/flooie/sampleproject/tags").read())
+          tag_url = context['event']['repository']['tags_url']
+          tags = json.loads(urllib.urlopen(tag_url).read())
+
           tagged_sha1 = tags[0]['commit']['sha']
           tag_name = tags[0]['name']
+
           default = context['event']['repository']['default_branch']
           branch = context['ref']
+
           if default in branch:
             ids = [x['id'] for x in context['event']['commits']]
             if tagged_sha1 in ids:
@@ -35,6 +41,3 @@ jobs:
 
         shell: python
 
-
-
-#so its only on push
