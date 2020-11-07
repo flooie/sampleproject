@@ -31,13 +31,13 @@ jobs:
       run: |
         import smtplib
         import email
-        import email.mime.application
+        from email.message import EmailMessage
         import os
 
         username = os.environ['USERNAME']
         password = os.environ['PASSWORD']
 
-        msg = email.mime.Multipart.MIMEMultipart()
+        msg = EmailMessage()
         msg['Subject'] = 'Running'
         msg['From'] = username
         msg['To'] = username
