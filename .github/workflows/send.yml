@@ -1,0 +1,49 @@
+name: Send Becker Emails
+
+on:
+  push:
+    branches:
+      - email
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+        architecture: 'x64'
+    - name: Display Python version
+      run: python -c "import sys; print(sys.version)"
+    - name: Setup pip
+      run: pip install requests
+
+    - name: Send mail
+      shell: python
+      id: vars
+      env:
+        USERNAME: ${{secrets.MAIL_USERNAME}}
+        PASSWORD: ${{secrets.MAIL_PASSWORD}}
+      run: |
+        import smtplib
+        import email
+        import email.mime.application
+        import os
+
+        username = os.environ['USERNAME'])
+        password = os.environ['PASSWORD'])
+
+        msg = email.mime.Multipart.MIMEMultipart()
+        msg['Subject'] = 'Running'
+        msg['From'] = username
+        msg['To'] = username
+        s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.starttls()
+        s.login(username, password)
+        s.sendmail(username, username, "this is a simple message")
+        s.quit()
+
