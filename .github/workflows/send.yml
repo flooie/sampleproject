@@ -34,8 +34,8 @@ jobs:
         import email.mime.application
         import os
 
-        username = os.environ['USERNAME'])
-        password = os.environ['PASSWORD'])
+        username = os.environ['USERNAME']
+        password = os.environ['PASSWORD']
 
         msg = email.mime.Multipart.MIMEMultipart()
         msg['Subject'] = 'Running'
