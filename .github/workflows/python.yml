@@ -42,10 +42,6 @@ jobs:
           print(os.environ['FOO'])
       - name: IFNOW
         id: ifwhen
-        env:
-          FOO: ${{ FOO }}
 
         run: |
-          import os
-          print(os.environ('FOO'))
-        shell: python
+          echo "${{ steps.tags }}"
