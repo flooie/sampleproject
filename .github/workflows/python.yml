@@ -33,9 +33,7 @@ jobs:
           CONTEXT: ${{ toJson(github) }}
         run: |
           import subprocess, os, re, json, urllib
-          x = "echo '::set-output name=PYPI_RELEASE::false'"
-          y = "echo '::set-output name=PYPI_RELEASE::true'"
-          subprocess.call(x, shell=True)
+          release_true = "echo '::set-output name=PYPI_RELEASE::true'"
 
           pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
           if "tags" in os.environ['GITHUB_REF']:
@@ -50,12 +48,12 @@ jobs:
             tag_name = tags[0]['name']
             if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
               if pattern.match(tag_name) is not None:
-                subprocess.call(y, shell=True)
+                subprocess.call(release_true, shell=True)
         id: tags
         shell: python
 
       - name: No PyPI release
-        if: steps.tags.outputs.PYPI_RELEASE == 'false'
+        if: steps.tags.outputs.PYPI_RELEASE != 'true'
         run: echo "Not a PyPI release."
 
       - name: PyPI release.
