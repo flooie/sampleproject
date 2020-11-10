@@ -58,6 +58,6 @@ jobs:
 #          build: true
 
       - name: Not a PyPI release.
-        if: steps.vars.outputs.HIT == 'False'
+        if: steps.vars.outputs.HIT != 'True'
         run: |
           echo "Not a PyPI release"
