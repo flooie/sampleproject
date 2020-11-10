@@ -47,7 +47,7 @@ jobs:
 
           if default not in branch:
             raise("Not a release")
-          if tagged_sha1 in [x['id'] for x not in context['event']['commits']]:
+          if tagged_sha1 not in [x['id'] for x in context['event']['commits']]:
             raise("Not a release")
           if pattern.match(tag_name) is None:
             raise("Not a release")
