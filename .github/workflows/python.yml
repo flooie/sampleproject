@@ -29,8 +29,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set tags
+        env:
+          CONTEXT: ${{ toJson(github) }}
         run: |
-          import subprocess, os, re
+          import subprocess, os, re, json
           x = "echo '::set-output name=SELECTED_COLOR::green'"
           y = "echo '::set-output name=SELECTED_COLOR::red'"
           subprocess.call(x, shell=True)
@@ -40,6 +42,16 @@ jobs:
             tag = os.environ['GITHUB_REF'].split("/")[-1]
             if pattern.match(tag) is not None:
               subprocess.call(y, shell=True)
+          else:
+            context = json.loads(os.environ['CONTEXT'])
+            tag_url = context['event']['repository']['tags_url']
+            tags = json.loads(urllib.urlopen(tag_url).read())
+            tagged_sha1 = tags[0]['commit']['sha']
+            tag_name = tags[0]['name']
+
+            if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
+              if pattern.match(tag_name) is not None:
+                subprocess.call(y, shell=True)
 
 
 
@@ -68,8 +80,8 @@ jobs:
 #
 #          print(context)
 #
-#          tag_url = context['event']['repository']['tags_url']
-#          tags = json.loads(urllib.urlopen(tag_url).read())
+          tag_url = context['event']['repository']['tags_url']
+          tags = json.loads(urllib.urlopen(tag_url).read())
 #
 #          tagged_sha1 = tags[0]['commit']['sha']
 #          tag_name = tags[0]['name']
