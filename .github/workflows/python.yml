@@ -16,9 +16,9 @@
 
 name: PyPI
 on:
-  push:
-    branches:
-      - main
+#  push:
+#    branches:
+#      - main
   create:
 
 jobs:
@@ -31,86 +31,102 @@ jobs:
           CONTEXT: ${{ toJson(github) }}
         run: |
           import subprocess, os, re, json, urllib
-          context = json.loads(os.environ['CONTEXT'])
+          events_url = context['event']['repository']['events_url']
+          events = json.loads(urllib.urlopen(events_url).read())
 
-          print(context)
-          x = "echo '::set-output name=SELECTED_COLOR::green'"
-          subprocess.call(x, shell=True)
+          print(events[0])
+          print(events[1])
 
-          release_true = "echo '::set-output name=PYPI_RELEASE::true'"
-
-          pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
-          if "tags" in os.environ['GITHUB_REF']:
-            print("FIRST IF")
-            tag = os.environ['GITHUB_REF'].split("/")[-1]
-            if pattern.match(tag) is not None:
-              print("MATCH TAG")
-              subprocess.call(release_true, shell=True)
-              print("calling this a release here")
-          else:
-            print("ELSE")
-            tag_url = context['event']['repository']['tags_url']
-            tags = json.loads(urllib.urlopen(tag_url).read())
-            tagged_sha1 = tags[0]['commit']['sha']
-            tag_name = tags[0]['name']
-
-            print(tag_url)
-            print(tags)
-            print(tag_name)
-
-            if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
-              print("tagged sha1")
-              if pattern.match(tag_name) is not None:
-                print("FINAL")
-
-                subprocess.call(release_true, shell=True)
-        id: tags
-        shell: python
-
-      - name: No PyPI release
-        if: steps.tags.outputs.PYPI_RELEASE != 'true'
-        run: |
-          echo "Not a PyPI release."
-          echo "${{ steps.tags.outputs.PYPI_RELEASE }}"
-          echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
-
-      - name: PyPI release
-        if: steps.tags.outputs.PYPI_RELEASE == 'true'
-        run: |
-          echo "A PyPI release."
-          echo "${{ steps.tags.outputs.PYPI_RELEASE }}"
-          echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
-#        uses: casperdcl/deploy-pypi@v1
-#        with:
-#          password: ${{ secrets.pypi_token }}
-#          build: true
-
-
-
-  run-pypiII:
-    name: 'PyPI'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set tags
-        run: |
-          import subprocess, os, re
-
-          pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
-          if "tags" in os.environ['GITHUB_REF']:
-            print("FIRST IF")
-            tag = os.environ['GITHUB_REF'].split("/")[-1]
-            if pattern.match(tag) is not None:
-              print("MATCH TAG")
-              x = "echo '::set-output name=SELECTED_COLOR::green'"
-              subprocess.call(x, shell=True)
-
-        id: tags
-        shell: python
-
-      - name: Get color
-        if: steps.tags.outputs.SELECTED_COLOR == 'green'
-        run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
-
-      - name: Get red
-        if: steps.tags.outputs.SELECTED_COLOR == 'red'
-        run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
+#jobs:
+#  run-pypi:
+#    name: 'PyPI'
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Check tag
+#        env:
+#          CONTEXT: ${{ toJson(github) }}
+#        run: |
+#          import subprocess, os, re, json, urllib
+#          context = json.loads(os.environ['CONTEXT'])
+#
+#          print(context)
+#          x = "echo '::set-output name=SELECTED_COLOR::green'"
+#          subprocess.call(x, shell=True)
+#
+#          release_true = "echo '::set-output name=PYPI_RELEASE::true'"
+#
+#          pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
+#          if "tags" in os.environ['GITHUB_REF']:
+#            print("FIRST IF")
+#            tag = os.environ['GITHUB_REF'].split("/")[-1]
+#            if pattern.match(tag) is not None:
+#              print("MATCH TAG")
+#              subprocess.call(release_true, shell=True)
+#              print("calling this a release here")
+#          else:
+#            print("ELSE")
+#            tag_url = context['event']['repository']['tags_url']
+#            tags = json.loads(urllib.urlopen(tag_url).read())
+#            tagged_sha1 = tags[0]['commit']['sha']
+#            tag_name = tags[0]['name']
+#
+#            print(tag_url)
+#            print(tags)
+#            print(tag_name)
+#
+#            if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
+#              print("tagged sha1")
+#              if pattern.match(tag_name) is not None:
+#                print("FINAL")
+#
+#                subprocess.call(release_true, shell=True)
+#        id: tags
+#        shell: python
+#
+#      - name: No PyPI release
+#        if: steps.tags.outputs.PYPI_RELEASE != 'true'
+#        run: |
+#          echo "Not a PyPI release."
+#          echo "${{ steps.tags.outputs.PYPI_RELEASE }}"
+#          echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
+#
+#      - name: PyPI release
+#        if: steps.tags.outputs.PYPI_RELEASE == 'true'
+#        run: |
+#          echo "A PyPI release."
+#          echo "${{ steps.tags.outputs.PYPI_RELEASE }}"
+#          echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
+##        uses: casperdcl/deploy-pypi@v1
+##        with:
+##          password: ${{ secrets.pypi_token }}
+##          build: true
+#
+#
+#
+#  run-pypiII:
+#    name: 'PyPI'
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Set tags
+#        run: |
+#          import subprocess, os, re, urllib
+#
+#          pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
+#          if "tags" in os.environ['GITHUB_REF']:
+#            print("FIRST IF")
+#            tag = os.environ['GITHUB_REF'].split("/")[-1]
+#            if pattern.match(tag) is not None:
+#              print("MATCH TAG")
+#              x = "echo '::set-output name=SELECTED_COLOR::green'"
+#              subprocess.call(x, shell=True)
+#
+#        id: tags
+#        shell: python
+#
+#      - name: Get color
+#        if: steps.tags.outputs.SELECTED_COLOR == 'green'
+#        run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
+#
+#      - name: Get red
+#        if: steps.tags.outputs.SELECTED_COLOR != 'green'
+#        run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
