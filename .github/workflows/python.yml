@@ -67,13 +67,16 @@ jobs:
 
       - name: No PyPI release
         if: steps.tags.outputs.PYPI_RELEASE != 'true'
-        run: echo "Not a PyPI release."
+        run: |
+          echo "Not a PyPI release."
+          echo "${{ steps.tags.outputs.PYPI_RELEASE }}"
 
       - name: PyPI release
         if: steps.tags.outputs.PYPI_RELEASE == 'true'
         run: |
           echo "A PyPI release."
           echo "${{ steps.tags.outputs.PYPI_RELEASE }}"
+
 #        uses: casperdcl/deploy-pypi@v1
 #        with:
 #          password: ${{ secrets.pypi_token }}
