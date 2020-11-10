@@ -44,4 +44,7 @@ jobs:
         id: ifwhen
 
         run: |
-          echo "${{ steps.tags.FOO }}"
+          echo "${{ steps.tags.conclusion }}"
+          echo "${{ steps.tags.output }}"
+          echo "${{ steps.tags.outcome }}"
+          echo "${{ steps.tags.outputs.FOO }}"
