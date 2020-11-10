@@ -38,6 +38,9 @@ jobs:
 
           subprocess.call('echo ::set-output name=continue::False', shell=True)
           context = json.loads(os.environ['CONTEXT'])
+
+          print(context)
+
           tag_url = context['event']['repository']['tags_url']
           tags = json.loads(urllib.urlopen(tag_url).read())
 
