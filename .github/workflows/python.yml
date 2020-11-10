@@ -40,6 +40,9 @@ jobs:
         if: steps.tags.outputs.SELECTED_COLOR == 'green'
         run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
 
+      - name: Get red
+        if: steps.tags.outputs.SELECTED_COLOR == 'red'
+        run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
 
 
 #      - name: Check Tags
