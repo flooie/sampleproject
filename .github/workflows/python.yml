@@ -35,17 +35,28 @@ jobs:
         run: |
           import os, json, urllib, subprocess, re
           context = json.loads(os.environ['CONTEXT'])
-          tag_url = context['event']['repository']['tags_url']
-          tags = json.loads(urllib.urlopen(tag_url).read())
-          subprocess.run('echo "action_state=yellow" >> $ GITHUB_ENV')
+#          import os
+#          from invoke import run
 
-      - name: Check on failures
-        if: 1 == 1
-        run: echo "${{ action_state }}"
+          my_vars = {'FOO': 'bar'}
+          os.environ.update(my_vars)
 
-      - name: Check not on failures
-        if: success()
-        run: echo "adfasdfasdfasdfadsf"
+          print(os.environ['FOO'])
+#          run("echo $FOO") # => should result in stdout of "bar"
+
+
+
+#          tag_url = context['event']['repository']['tags_url']
+#          tags = json.loads(urllib.urlopen(tag_url).read())
+#          subprocess.run('echo "action_state=yellow" >> $ GITHUB_ENV')
+#
+#      - name: Check on failures
+#        if: 1 == 1
+#        run: echo "${{ action_state }}"
+#
+#      - name: Check not on failures
+#        if: success()
+#        run: echo "adfasdfasdfasdfadsf"
 
 #
 #      - name: PyPI release!
@@ -84,3 +95,5 @@ jobs:
 #      - name: Check on failures
 #        if: job.steps.hello.status == failure()
 #        run: echo "adfasdfasdfasdfadsf"
+
+# echo alias rpi='ssh pi@192.168.0.30' >> ~/.zshrc
