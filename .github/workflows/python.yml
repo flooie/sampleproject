@@ -51,7 +51,7 @@ jobs:
             raise("Tag doesnt match")
 
       - name: Check not on failures
-        if: success()
+        if: ${{ success() }}
         run: echo "adfasdfasdfasdfadsf"
 
 
