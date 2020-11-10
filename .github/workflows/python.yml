@@ -44,6 +44,17 @@ jobs:
           print(events[1]['payload']['ref'])
           if "refs/heads/main" == events[1]['payload']['ref']:
             print("we have a release")
+            x = "echo '::set-output name=SELECTED_COLOR::green'"
+            subprocess.call(x, shell=True)
+
+    - name: Get color
+      if: steps.tags.outputs.SELECTED_COLOR == 'green'
+      run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
+
+    - name: Get not color
+      if: steps.tags.outputs.SELECTED_COLOR != 'green'
+      run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
+
 
 #          if "refs/heads/main" in events[0]['ref']:
 #            print("tag pushed into master")
