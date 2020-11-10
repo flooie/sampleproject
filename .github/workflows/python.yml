@@ -38,7 +38,6 @@ jobs:
           events = json.loads(urllib.urlopen(events_url).read())
 
           print(events[0]['payload'])
-#          print(events[0]['payload']['ref_type'])
           print(events[0]['payload']['ref'])
           print("")
           print(events[1]['payload']['ref'])
