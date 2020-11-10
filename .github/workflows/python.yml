@@ -32,6 +32,7 @@ jobs:
           CONTEXT: ${{ toJson(github) }}
         run: |
           import subprocess, os, re, json, urllib
+          context = json.loads(os.environ['CONTEXT'])
           events_url = context['event']['repository']['events_url']
           events = json.loads(urllib.urlopen(events_url).read())
 
