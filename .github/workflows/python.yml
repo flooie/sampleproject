@@ -52,7 +52,7 @@ jobs:
 
       - name: Check on failures
         if: failure()
-        run: echo "adfasdfasdfasdfadsf"
+        run: echo "ddd"
 
       - name: Check not on failures
         if: success()
