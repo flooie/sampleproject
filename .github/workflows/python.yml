@@ -45,15 +45,14 @@ jobs:
           branch = context['ref']
           pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
 
-          if default in branch:
-            if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
-              if pattern.match(tag_name) is not None:
-                raise("OKOKK")
+          if tagged_sha1 not in [x['id'] for x in context['event']['commits']]:
+            raise("Not tagged")
+          if pattern.match(tag_name) is None:
+            raise("Tag doesnt match")
 
       - name: Check on failures
         if: failure()
         run: echo "adfasdfasdfasdfadsf"
-
 
       - name: Check not on failures
         if: success()
