@@ -40,12 +40,9 @@ jobs:
           print(events[0])
           print("")
           print(events[1])
-#          print(events['payload'][0]['ref'])
-#          print(events['payload'][1]['ref_type'])
-#          print(events['payload'][1]['ref'])
 
-          if "refs/heads/main" in events[0]['ref']:
-            print("tag pushed into master")
+#          if "refs/heads/main" in events[0]['ref']:
+#            print("tag pushed into master")
 #jobs:
 #  run-pypi:
 #    name: 'PyPI'
