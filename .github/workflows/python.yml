@@ -77,22 +77,8 @@ jobs:
           import os, json, urllib, subprocess, re
           subprocess.call('echo ::set-output name=continue::False', shell=True)
           exit()
-#          context = json.loads(os.environ['CONTEXT'])
-#          tag_url = context['event']['repository']['tags_url']
-#          tags = json.loads(urllib.urlopen(tag_url).read())
-#
-#          tagged_sha1 = tags[0]['commit']['sha']
-#          tag_name = tags[0]['name']
-#
-#          default = context['event']['repository']['default_branch']
-#          branch = context['ref']
-#          pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
-#
-#          if default in branch:
-#            if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
-#              if pattern.match(tag_name) is not None:
-#                subprocess.call('echo ::set-output name=continue::True', shell=True)
 
-        if: 1 == 1
-        run |
-          print("OKKOKOOK")
+      - name: Not a PyPI release.
+        if: failure()
+        run: |
+          echo "Not a PyPI release"
