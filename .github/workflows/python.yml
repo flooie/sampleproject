@@ -35,6 +35,8 @@ jobs:
           subprocess.call(x, shell=True)
 
           print(os.environ.keys())
+          for key in os.environ.keys():
+            print(key, os.environ[key])
         id: tags
         shell: python
 
