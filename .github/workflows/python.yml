@@ -71,8 +71,9 @@ jobs:
 
       - name: PyPI release
         if: steps.tags.outputs.PYPI_RELEASE == 'true'
-        run: echo "A PyPI release."
-
+        run: |
+          echo "A PyPI release."
+          echo "${{ steps.tags.outputs.PYPI_RELEASE }}"
 #        uses: casperdcl/deploy-pypi@v1
 #        with:
 #          password: ${{ secrets.pypi_token }}
