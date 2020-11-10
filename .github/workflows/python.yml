@@ -28,7 +28,7 @@ jobs:
     name: 'PyPI'
     runs-on: ubuntu-latest
     steps:
-      - name: Set tags
+      - name: Check tag
         env:
           CONTEXT: ${{ toJson(github) }}
         run: |
@@ -56,7 +56,7 @@ jobs:
         if: steps.tags.outputs.PYPI_RELEASE != 'true'
         run: echo "Not a PyPI release."
 
-      - name: PyPI release.
+      - name: PyPI release
         if: steps.tags.outputs.PYPI_RELEASE == 'true'
         uses: casperdcl/deploy-pypi@v1
         with:
