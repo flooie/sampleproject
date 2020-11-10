@@ -38,3 +38,4 @@ jobs:
           my_vars = {'FOO': 'bar'}
           os.environ.update(my_vars)
           print(os.environ['FOO'])
+
