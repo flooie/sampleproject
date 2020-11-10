@@ -37,7 +37,7 @@ jobs:
           events_url = context['event']['repository']['events_url']
           events = json.loads(urllib.urlopen(events_url).read())
 
-          print(events[0])
+          print(events[0]['payload'])
           print("")
           print(events[1])
 
