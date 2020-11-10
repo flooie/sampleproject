@@ -33,6 +33,8 @@ jobs:
           import subprocess
           x = "echo '::set-output name=SELECTED_COLOR::green'"
           subprocess.call(x, shell=True)
+
+          print(os.environ['github'])
         id: tags
         shell: python
 
