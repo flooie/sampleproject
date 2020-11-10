@@ -51,15 +51,16 @@ jobs:
             if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
               if pattern.match(tag_name) is not None:
                 subprocess.call(y, shell=True)
-
         id: tags
         shell: python
 
       - name: No PyPI release
         if: steps.tags.outputs.PYPI_RELEASE == 'false'
-        run: echo "The selected color is ${{ steps.tags.outputs.PYPI_RELEASE }}"
+        run: echo "Not a PyPI release."
 
-      - name: PyPI Release
+      - name: PyPI release.
         if: steps.tags.outputs.PYPI_RELEASE == 'true'
-        run: echo "The selected color is ${{ steps.tags.outputs.PYPI_RELEASE }}"
-
+        uses: casperdcl/deploy-pypi@v1
+        with:
+          password: ${{ secrets.pypi_token }}
+          build: true
