@@ -49,7 +49,7 @@ jobs:
       - name: PyPI release!
         if: steps.vars.outputs.HIT == 'True'
         run: |
-          echo "PyPI releasasdfa sdfa sdfasdfsdf"
+          echo "PyPI release"
 
 
       #        uses: casperdcl/deploy-pypi@v1
