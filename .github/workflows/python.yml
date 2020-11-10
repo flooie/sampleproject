@@ -34,10 +34,8 @@ jobs:
           CONTEXT: ${{ toJson(github) }}
         run: |
           import os, json, urllib, subprocess, re
-          context = json.loads(os.environ['CONTEXT'])
-#          import os
 #          from invoke import run
-
+          context = json.loads(os.environ['CONTEXT'])
           my_vars = {'FOO': 'bar'}
           os.environ.update(my_vars)
 
