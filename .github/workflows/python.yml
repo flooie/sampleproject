@@ -93,7 +93,7 @@ jobs:
     steps:
       - name: Set tags
         run: |
-          import subprocess, os
+          import subprocess, os, re
 
           pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
           if "tags" in os.environ['GITHUB_REF']:
