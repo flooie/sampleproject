@@ -44,16 +44,16 @@ jobs:
           print(events[1]['payload']['ref'])
           if "refs/heads/main" == events[1]['payload']['ref']:
             print("we have a release")
-            x = "echo '::set-output name=SELECTED_COLOR::green'"
+            x = "echo '::set-output name=RUN_PYPI_OK::okay'"
             subprocess.call(x, shell=True)
 
       - name: Get color
-        if: steps.tags.outputs.SELECTED_COLOR == 'green'
-        run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
+        if: steps.tags.outputs.RUN_PYPI_OK == 'okay'
+        run: echo "The selected color is ${{ steps.tags.outputs.RUN_PYPI_OK }}"
 
       - name: Get not color
-        if: steps.tags.outputs.SELECTED_COLOR != 'green'
-        run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
+        if: steps.tags.outputs.RUN_PYPI_OK != 'okay'
+        run: echo "The selected color is ${{ steps.tags.outputs.RUN_PYPI_OK }}"
 
 
 #          if "refs/heads/main" in events[0]['ref']:
