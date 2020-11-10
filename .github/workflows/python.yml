@@ -37,21 +37,28 @@ jobs:
           context = json.loads(os.environ['CONTEXT'])
           tag_url = context['event']['repository']['tags_url']
           tags = json.loads(urllib.urlopen(tag_url).read())
+#          subprocess.call('echo ::set-output name=continue::False', shell=True)
+          subprocess.call('echo "action_state=yellow" >> $ GITHUB_ENV', shell=True)
 
-          tagged_sha1 = tags[0]['commit']['sha']
-          tag_name = tags[0]['name']
+#          tagged_sha1 = tags[0]['commit']['sha']
+#          tag_name = tags[0]['name']
+#
+#          default = context['event']['repository']['default_branch']
+#          branch = context['ref']
+#          pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
 
-          pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
-          if pattern.match(tag_name) is None:
-            raise("Tag doesnt match")
+#          if tagged_sha1 not in [x['id'] for x in context['event']['commits']]:
+#            raise("Not tagged")
+#          if pattern.match(tag_name) is None:
+#              raise("Tag ")
 
-          if tagged_sha1 not in [x['id'] for x in context['event']['commits']]:
-            raise("Not tagged")
+      - name: Check on failures
+        if: 1 == 1
+        run: echo "${{ action_state }}"
 
-      - name: Run success
+      - name: Check not on failures
         if: success()
         run: echo "adfasdfasdfasdfadsf"
-
 
 #
 #      - name: PyPI release!
