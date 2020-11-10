@@ -75,7 +75,7 @@ jobs:
           CONTEXT: ${{ toJson(github) }}
         run: |
           import os, json, urllib, subprocess, re
-          subprocess.call('echo ::set-output name=continue::False', shell=True)
+          print("OKKOKO")
           exit()
 
       - name: Not a PyPI release.
