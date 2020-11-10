@@ -34,64 +34,7 @@ jobs:
           CONTEXT: ${{ toJson(github) }}
         run: |
           import os, json, urllib, subprocess, re
-#          from invoke import run
           context = json.loads(os.environ['CONTEXT'])
           my_vars = {'FOO': 'bar'}
           os.environ.update(my_vars)
-
           print(os.environ['FOO'])
-#          run("echo $FOO") # => should result in stdout of "bar"
-
-
-
-#          tag_url = context['event']['repository']['tags_url']
-#          tags = json.loads(urllib.urlopen(tag_url).read())
-#          subprocess.run('echo "action_state=yellow" >> $ GITHUB_ENV')
-#
-#      - name: Check on failures
-#        if: 1 == 1
-#        run: echo "${{ action_state }}"
-#
-#      - name: Check not on failures
-#        if: success()
-#        run: echo "adfasdfasdfasdfadsf"
-
-#
-#      - name: PyPI release!
-#        if: steps.vars.outputs.continue == 'True'
-#        uses: casperdcl/deploy-pypi@v1
-#        with:
-#          password: ${{ secrets.pypi_token }}
-#          build: true
-#
-#      - name: Not a PyPI release.
-#        if: steps.vars.outputs.continue == 'False'
-#        run: |
-#          echo "Not a PyPI release"
-
-
-#jobs:
-#  test-I:
-#    name: 'PyPI'
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Check Tags
-#        shell: python
-#        id: hello
-#        continue-on-error: true
-#        env:
-#          CONTEXT: ${{ toJson(github) }}
-#        run: |
-#          import os, json, urllib, subprocess, re
-#          raise("error")
-#
-#      - name: Not a PyPI release.
-#        if: failure()
-#        run: |
-#          echo "Not a PyPI release"
-#
-#      - name: Check on failures
-#        if: job.steps.hello.status == failure()
-#        run: echo "adfasdfasdfasdfadsf"
-
-# echo alias rpi='ssh pi@192.168.0.30' >> ~/.zshrc
