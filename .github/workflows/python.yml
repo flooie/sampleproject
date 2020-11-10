@@ -37,7 +37,7 @@ jobs:
           context = json.loads(os.environ['CONTEXT'])
           tag_url = context['event']['repository']['tags_url']
           tags = json.loads(urllib.urlopen(tag_url).read())
-          subprocess.call('echo "action_state=yellow" >> $ GITHUB_ENV', shell=True)
+          subprocess.call('echo "action_state=yellow" >> $ GITHUB_ENV')
 
       - name: Check on failures
         if: 1 == 1
