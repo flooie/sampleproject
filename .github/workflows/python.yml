@@ -44,4 +44,4 @@ jobs:
         id: ifwhen
 
         run: |
-          echo "${{ steps.tags }}"
+          echo "${{ steps.tags.FOO }}"
