@@ -32,11 +32,12 @@ jobs:
         continue-on-error: true
         env:
           CONTEXT: ${{ toJson(github) }}
+          FOO: 'foo'
         run: |
           import os, json, urllib, subprocess, re
           context = json.loads(os.environ['CONTEXT'])
-          print(content)
-#          my_vars = {'FOO': 'bar'}
-#          os.environ.update(my_vars)
-#          print(os.environ['FOO'])
+          print(context)
+          my_vars = {'FOO': 'bar'}
+          os.environ.update(my_vars)
+          print(os.environ['FOO'])
 
