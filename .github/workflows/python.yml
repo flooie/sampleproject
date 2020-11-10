@@ -43,5 +43,6 @@ jobs:
       - name: IFNOW
         id: ifwhen
         run: |
+          import os
           print(os.environ('FOO'))
         shell: python
