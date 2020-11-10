@@ -28,6 +28,7 @@ jobs:
     steps:
       - name: Check tag
         shell: python
+        id: tags
         env:
           CONTEXT: ${{ toJson(github) }}
         run: |
@@ -37,8 +38,12 @@ jobs:
           events = json.loads(urllib.urlopen(events_url).read())
 
           print(events[0])
-          print(events[1])
+          print(events[0]['ref'])
+          print(events[1]['ref_type'])
+          print(events[1]['ref'])
 
+          if "refs/heads/main" in events[0]['ref']:
+            print("tag pushed into master")
 #jobs:
 #  run-pypi:
 #    name: 'PyPI'
