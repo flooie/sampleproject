@@ -34,7 +34,7 @@ jobs:
           x = "echo '::set-output name=SELECTED_COLOR::green'"
           subprocess.call(x, shell=True)
 
-          print(os.environ['github'])
+          print(os.environ.keys())
         id: tags
         shell: python
 
