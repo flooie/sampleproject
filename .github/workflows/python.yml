@@ -50,10 +50,6 @@ jobs:
           if pattern.match(tag_name) is None:
             raise("Tag doesnt match")
 
-      - name: Check on failures
-        if: failure()
-        run: echo "ddd"
-
       - name: Check not on failures
         if: success()
         run: echo "adfasdfasdfasdfadsf"
