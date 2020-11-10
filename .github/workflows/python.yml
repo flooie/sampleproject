@@ -32,18 +32,12 @@ jobs:
         continue-on-error: true
         env:
           CONTEXT: ${{ toJson(github) }}
-          FOO: 'foo'
         run: |
-          import os, json, urllib, subprocess, re
-          context = json.loads(os.environ['CONTEXT'])
-          print(context)
-          my_vars = {'FOO': 'bar'}
-          os.environ.update(my_vars)
-          print(os.environ['FOO'])
           raise("this is an error")
+
       - name: IFNOW
         id: ifwhen
-        if: contains({{steps.tags.outcome}}, 'failure')
+        if: success()
         run: |
           echo "${{ steps.tags.conclusion }}"
           echo "${{ steps.tags.output }}"
