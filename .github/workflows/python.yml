@@ -37,6 +37,7 @@ jobs:
           events_url = context['event']['repository']['events_url']
           events = json.loads(urllib.urlopen(events_url).read())
 
+          print(events)
           print(events[0])
           print(events[0]['ref'])
           print(events[1]['ref_type'])
