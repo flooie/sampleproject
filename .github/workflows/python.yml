@@ -34,6 +34,8 @@ jobs:
           context = json.loads(os.environ['CONTEXT'])
 
           print(context)
+          x = "echo '::set-output name=SELECTED_COLOR::green'"
+          subprocess.call(x, shell=True)
 
           release_true = "echo '::set-output name=PYPI_RELEASE::true'"
 
@@ -70,13 +72,14 @@ jobs:
         run: |
           echo "Not a PyPI release."
           echo "${{ steps.tags.outputs.PYPI_RELEASE }}"
+          echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
 
       - name: PyPI release
         if: steps.tags.outputs.PYPI_RELEASE == 'true'
         run: |
           echo "A PyPI release."
           echo "${{ steps.tags.outputs.PYPI_RELEASE }}"
-
+          echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
 #        uses: casperdcl/deploy-pypi@v1
 #        with:
 #          password: ${{ secrets.pypi_token }}
