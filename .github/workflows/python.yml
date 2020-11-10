@@ -30,7 +30,6 @@ jobs:
     steps:
       - name: Set tags
         run: echo '::set-output name=SELECTED_COLOR::green'
-        shell: python
         id: tags
 
       - name: Get color
