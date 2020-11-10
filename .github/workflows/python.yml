@@ -48,7 +48,7 @@ jobs:
           if tagged_sha1 not in [x['id'] for x in context['event']['commits']]:
             raise("Not tagged")
 
-      - name: Check not on failures
+      - name: Run success
         if: success()
         run: echo "adfasdfasdfasdfadsf"
 
