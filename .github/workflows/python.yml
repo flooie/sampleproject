@@ -51,12 +51,12 @@ jobs:
                 raise("OKOKK")
 
       - name: Check on failures
-        if: job.steps.tags.status == failure()
+        if: failure()
         run: echo "adfasdfasdfasdfadsf"
 
 
       - name: Check not on failures
-        if: job.steps.tags.status == success()
+        if: success()
         run: echo "adfasdfasdfasdfadsf"
 
 #
