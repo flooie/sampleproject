@@ -94,11 +94,16 @@ jobs:
       - name: Set tags
         run: |
           import subprocess, os
-          x = "echo '::set-output name=SELECTED_COLOR::green'"
-          subprocess.call(x, shell=True)
-          print(os.environ.keys())
-          for key in os.environ.keys():
-            print(key, os.environ[key])
+
+          pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
+          if "tags" in os.environ['GITHUB_REF']:
+            print("FIRST IF")
+            tag = os.environ['GITHUB_REF'].split("/")[-1]
+            if pattern.match(tag) is not None:
+              print("MATCH TAG")
+              x = "echo '::set-output name=SELECTED_COLOR::green'"
+              subprocess.call(x, shell=True)
+
         id: tags
         shell: python
 
