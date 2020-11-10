@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Set tags
         run: |
-          import subprocess
+          import subprocess, os
           x = "echo '::set-output name=SELECTED_COLOR::green'"
           subprocess.call(x, shell=True)
 
