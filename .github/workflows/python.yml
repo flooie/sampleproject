@@ -47,12 +47,6 @@ jobs:
           tagged_sha1 = tags[0]['commit']['sha']
           tag_name = tags[0]['name']
           pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
-#          if context['event']['ref_type'] == 'tag':
-#            tag_name = context['event']['ref']
-#            if pattern.match(tag_name) is not None:
-#              subprocess.call('echo ::set-output name=HIT::True', shell=True)
-#          if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
-#            if pattern.match(tag_name) is not None:
           subprocess.call('echo ::set-output name=HIT::True', shell=True)
 
       - name: PyPI release!
