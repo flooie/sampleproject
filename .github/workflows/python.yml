@@ -29,8 +29,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set tags
-        run: echo '::set-output name=SELECTED_COLOR::green'
+        run: |
+          import subprocess
+          x = "echo '::set-output name=SELECTED_COLOR::green'"
+          subprocess.call(x, shell=True)
         id: tags
+        shell: python
 
       - name: Get color
         if: steps.tags.outputs.SELECTED_COLOR == 'green'
