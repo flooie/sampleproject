@@ -84,3 +84,28 @@ jobs:
 #        with:
 #          password: ${{ secrets.pypi_token }}
 #          build: true
+
+
+
+  run-pypiII:
+    name: 'PyPI'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set tags
+        run: |
+          import subprocess, os
+          x = "echo '::set-output name=SELECTED_COLOR::green'"
+          subprocess.call(x, shell=True)
+          print(os.environ.keys())
+          for key in os.environ.keys():
+            print(key, os.environ[key])
+        id: tags
+        shell: python
+
+      - name: Get color
+        if: steps.tags.outputs.SELECTED_COLOR == 'green'
+        run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
+
+      - name: Get red
+        if: steps.tags.outputs.SELECTED_COLOR == 'red'
+        run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
