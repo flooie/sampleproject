@@ -44,6 +44,7 @@ jobs:
             if pattern.match(tag) is not None:
               print("MATCH TAG")
               subprocess.call(release_true, shell=True)
+              print("calling this a release here")
           else:
             print("ELSE")
             tag_url = context['event']['repository']['tags_url']
@@ -59,6 +60,7 @@ jobs:
               print("tagged sha1")
               if pattern.match(tag_name) is not None:
                 print("FINAL")
+
                 subprocess.call(release_true, shell=True)
         id: tags
         shell: python
