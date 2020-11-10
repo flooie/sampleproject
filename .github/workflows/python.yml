@@ -32,7 +32,7 @@ jobs:
         env:
           CONTEXT: ${{ toJson(github) }}
         run: |
-          import subprocess, os, re, json
+          import subprocess, os, re, json, urllib
           x = "echo '::set-output name=SELECTED_COLOR::green'"
           y = "echo '::set-output name=SELECTED_COLOR::red'"
           subprocess.call(x, shell=True)
