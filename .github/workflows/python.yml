@@ -57,10 +57,12 @@ jobs:
 
       - name: PyPI release!
         if: steps.vars.outputs.HIT == 'True'
-        uses: casperdcl/deploy-pypi@v1
-        with:
-          password: ${{ secrets.pypi_token }}
-          build: true
+        run: |
+          echo "a PyPI release"
+#        uses: casperdcl/deploy-pypi@v1
+#        with:
+#          password: ${{ secrets.pypi_token }}
+#          build: true
 
       - name: Not a PyPI release.
         if: steps.vars.outputs.HIT != 'True'
