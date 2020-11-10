@@ -43,7 +43,7 @@ jobs:
           raise("this is an error")
       - name: IFNOW
         id: ifwhen
-        if: ${{ steps.tags.outcome }} == "success"
+        if: ${{ steps.tags.outcome }} == "failure"
         run: |
           echo "${{ steps.tags.conclusion }}"
           echo "${{ steps.tags.output }}"
