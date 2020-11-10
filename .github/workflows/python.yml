@@ -70,7 +70,8 @@ jobs:
     steps:
       - name: Check Tags
         shell: python
-        id: vars
+        id: hello
+        continue-on-error: true
         env:
           CONTEXT: ${{ toJson(github) }}
         run: |
@@ -82,3 +83,7 @@ jobs:
         if: failure()
         run: |
           echo "Not a PyPI release"
+
+      - name: Check on failures
+        if: job.steps.hello.status == failure()
+        run: echo "adfasdfasdfasdfadsf"
