@@ -41,16 +41,21 @@ jobs:
 
           pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
           if "tags" in os.environ['GITHUB_REF']:
+            print("FIRST IF")
             tag = os.environ['GITHUB_REF'].split("/")[-1]
             if pattern.match(tag) is not None:
+              print("MATCH TAG")
               subprocess.call(release_true, shell=True)
           else:
+            print("ELSE")
             tag_url = context['event']['repository']['tags_url']
             tags = json.loads(urllib.urlopen(tag_url).read())
             tagged_sha1 = tags[0]['commit']['sha']
             tag_name = tags[0]['name']
             if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
+              print("tagged sha1")
               if pattern.match(tag_name) is not None:
+                print("FINAL")
                 subprocess.call(release_true, shell=True)
         id: tags
         shell: python
