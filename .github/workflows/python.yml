@@ -33,8 +33,8 @@ jobs:
           CONTEXT: ${{ toJson(github) }}
         run: |
           import subprocess, os, re, json, urllib
-          x = "echo '::set-output name=SELECTED_COLOR::green'"
-          y = "echo '::set-output name=SELECTED_COLOR::red'"
+          x = "echo '::set-output name=PYPI_RELEASE::false'"
+          y = "echo '::set-output name=PYPI_RELEASE::true'"
           subprocess.call(x, shell=True)
 
           pattern = re.compile("^v\d{1,2}\.\d{1,2}\.\d{1,2}")
@@ -48,7 +48,6 @@ jobs:
             tags = json.loads(urllib.urlopen(tag_url).read())
             tagged_sha1 = tags[0]['commit']['sha']
             tag_name = tags[0]['name']
-
             if tagged_sha1 in [x['id'] for x in context['event']['commits']]:
               if pattern.match(tag_name) is not None:
                 subprocess.call(y, shell=True)
@@ -57,10 +56,10 @@ jobs:
         shell: python
 
       - name: No PyPI release
-        if: steps.tags.outputs.SELECTED_COLOR == 'green'
-        run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
+        if: steps.tags.outputs.PYPI_RELEASE == 'false'
+        run: echo "The selected color is ${{ steps.tags.outputs.PYPI_RELEASE }}"
 
       - name: PyPI Release
-        if: steps.tags.outputs.SELECTED_COLOR == 'red'
-        run: echo "The selected color is ${{ steps.tags.outputs.SELECTED_COLOR }}"
+        if: steps.tags.outputs.PYPI_RELEASE == 'true'
+        run: echo "The selected color is ${{ steps.tags.outputs.PYPI_RELEASE }}"
 
