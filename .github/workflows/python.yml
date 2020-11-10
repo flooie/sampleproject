@@ -39,8 +39,11 @@ jobs:
 
           print(events[0]['payload'])
           print(events[0]['payload']['ref'])
+          tag = events[0]['payload']['ref']
           print("")
           print(events[1]['payload']['ref'])
+          if "refs/heads/main" == events[1]['payload']['ref']:
+            print("we have a release")
 
 #          if "refs/heads/main" in events[0]['ref']:
 #            print("tag pushed into master")
