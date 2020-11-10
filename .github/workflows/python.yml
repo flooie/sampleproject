@@ -33,7 +33,6 @@ jobs:
           CONTEXT: ${{ toJson(github) }}
         run: |
           import os, json, urllib, subprocess, re
-
           subprocess.call('echo ::set-output name=continue::False', shell=True)
           context = json.loads(os.environ['CONTEXT'])
           tag_url = context['event']['repository']['tags_url']
