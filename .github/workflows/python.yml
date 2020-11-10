@@ -76,7 +76,7 @@ jobs:
         run: |
           import os, json, urllib, subprocess, re
           print("OKKOKO")
-          exit()
+          raise("error")
 
       - name: Not a PyPI release.
         if: failure()
