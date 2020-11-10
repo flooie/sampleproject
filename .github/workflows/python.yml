@@ -39,7 +39,7 @@ jobs:
           if "tags" in os.environ['GITHUB_REF']:
             tag = os.environ['GITHUB_REF'].split("/")[-1]
             if pattern.match(tag) is not None:
-              subprocess.call(y, shell=True)
+              subprocess.call(release_true, shell=True)
           else:
             context = json.loads(os.environ['CONTEXT'])
             tag_url = context['event']['repository']['tags_url']
