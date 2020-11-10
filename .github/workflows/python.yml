@@ -62,3 +62,5 @@ jobs:
         if: steps.vars.outputs.HIT != 'True'
         run: |
           echo "Not a PyPI release"
+          echo "{{ steps.vars.outputs.HIT }}"
+          echo "${{ steps.vars.outputs.HIT }}"
