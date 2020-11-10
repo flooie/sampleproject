@@ -27,6 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check tag
+        shell: python
         env:
           CONTEXT: ${{ toJson(github) }}
         run: |
