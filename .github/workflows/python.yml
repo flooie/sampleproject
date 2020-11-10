@@ -37,9 +37,10 @@ jobs:
           events_url = context['event']['repository']['events_url']
           events = json.loads(urllib.urlopen(events_url).read())
 
-          print(events['payload'][0]['ref'])
-          print(events['payload'][1]['ref_type'])
-          print(events['payload'][1]['ref'])
+          print(events)
+#          print(events['payload'][0]['ref'])
+#          print(events['payload'][1]['ref_type'])
+#          print(events['payload'][1]['ref'])
 
           if "refs/heads/main" in events[0]['ref']:
             print("tag pushed into master")
